@@ -11,7 +11,6 @@ public class Main {
 
 
         StartPage startPage = new StartPage();
-        // startPage.creatingStartPage();
         
         
     }
