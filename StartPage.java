@@ -9,12 +9,11 @@ import javax.swing.JPanel;
 
 public class StartPage {
 
-    public void creatingStartPage () {
+    public StartPage() {
         JFrame startPageWindowFrame = new JFrame("2048 MENU");
         
-        // Set default behavior to exit the application when the window is closed
+        // this is for existing the program
         startPageWindowFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Make the pannel transperant, so the window color can be sen
 
         Color darkBlue = new Color(38, 70, 83); 
         Color aqua = new Color(42, 157, 143);
@@ -23,7 +22,7 @@ public class StartPage {
         JPanel panel = new JPanel();
         panel.setOpaque(false); // makes it transparent to show the JFrame's color
         panel.setLayout(null);
-        // Create three JButton instances and set their possitions and colors
+        // creating three buttons, so far only play works
 
         // PLAY BUTTON
         JButton buttonPlay = new JButton("Play");
@@ -36,7 +35,7 @@ public class StartPage {
                 // Hide the main frame
                 startPageWindowFrame.setVisible(false);
 
-                // Open the new frame (like a new "page")
+                // Open the new frame
                 PlayPage newFrameInstance = new PlayPage(startPageWindowFrame);
                 newFrameInstance.setVisible(true);
             }

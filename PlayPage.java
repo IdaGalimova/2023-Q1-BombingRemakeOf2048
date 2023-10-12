@@ -1,4 +1,7 @@
 import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,9 +36,15 @@ public class PlayPage extends JFrame{
         });
 
         JLabel textABoutGame = new JLabel("insert game here");
+        Font customFont = new Font("Monospaced", Font.ITALIC, 20);
         textABoutGame.setForeground(Color.CYAN);
-        textABoutGame.setBounds(150, 150, 200, 40);
+        textABoutGame.setFont(customFont);
+        textABoutGame.setBounds(100, 150, 200, 40);
 
+        //ImageIcon imageIcon = new ImageIcon("C:\\Users\\user\\Desktop\\programing\\2048\\2023-Q1-BombingRemakeOf2048\\jogaila.jpg"); // Replace with your image path
+        //JLabel imageLabel = new JLabel(imageIcon);
+        //add(imageLabel);
+        //imageLabel.setBounds(0, 0, 1080, 710);
         add(textABoutGame);
         add(backButton);
 
