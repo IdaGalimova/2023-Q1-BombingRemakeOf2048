@@ -1,6 +1,7 @@
+package Classes;
 import java.awt.Color;
 
-abstract class Tile {
+public class Tile {
     private int value;
     private Color color;
 
@@ -8,5 +9,14 @@ abstract class Tile {
     public Tile(int value) {
         this.value = value;
         this.color = new Color(255,   0,   0); // change this later
+    }
+
+    // My try on getter:
+    public int getValue() {
+        return this.value;
+    } 
+
+    public void setValue(int newValue) {
+        this.value = newValue;
     }
 }

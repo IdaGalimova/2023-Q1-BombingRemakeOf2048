@@ -1,3 +1,4 @@
+package Classes;
 public class SuperTile extends Tile {
     private int timesUsed;
     private OrdinaryTile canBombTile;

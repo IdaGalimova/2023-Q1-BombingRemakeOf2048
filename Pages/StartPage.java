@@ -6,9 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
-public class StartPage {
-
+class StartPage {
     public StartPage() {
         JFrame startPageWindowFrame = new JFrame("2048 MENU");
         

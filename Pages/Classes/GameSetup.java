@@ -1,3 +1,7 @@
+package Classes;
+
+import java.util.Arrays;
+
 public class GameSetup {
     private Tile[][] grid;
     private int score;
@@ -6,11 +10,24 @@ public class GameSetup {
         grid = new Tile[4][4];
         score = 0;
 
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                grid[i][j] = new Tile(0);
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print(grid [i][j].getValue() + " ");
+            }
+            System.out.println();
+        }
+
         // Maybe add here methods for the first Tiles to spawn
     }
 
     public void spawnNewTile() {
-
+        
     }
 
     public void moveTiles(String direction) { // not sure what data type to assign
