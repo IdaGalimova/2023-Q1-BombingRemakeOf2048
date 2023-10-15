@@ -19,4 +19,12 @@ public class Tile {
     public void setValue(int newValue) {
         this.value = newValue;
     }
+
+    public boolean hasValue() {
+        if (this.value != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
