@@ -9,23 +9,7 @@ public class MainGame {
     }
 
     void run() {
-        System.out.println("Start of the game:");
-        System.out.println();
-
-        gameSetup.printGrid();
-
-        gameSetup.moveTiles("down");
-        gameSetup.printGrid();
-
-        gameSetup.moveTiles("right");
-        gameSetup.printGrid();
-
-        gameSetup.moveTiles("up");
-        gameSetup.printGrid();
-
-        gameSetup.moveTiles("left");
-        gameSetup.printGrid();
-
+        
     }
 
     public static void main(String[] args) {

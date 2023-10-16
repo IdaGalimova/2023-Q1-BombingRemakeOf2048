@@ -16,10 +16,6 @@ public class GameSetup {
             }
         }
 
-        grid[1][1].setValue(2); // delete later!!! only for testing
-        grid[1][2].setValue(4); // delete later!!! only for testing
-        grid[0][1].setValue(8); // delete later!!! only for testing
-
         // Maybe add here methods for the first Tiles to spawn
     }
 
@@ -113,10 +109,6 @@ public class GameSetup {
         }
     }
 
-    // 0 0 0 2
-    // 0 0 0 0
-    // 0 0 0 0
-    // 0 0 0 0
     public void moveTilesLeft() {
         for (int row = 0; row < 4; row++) {
             int count = 0;
