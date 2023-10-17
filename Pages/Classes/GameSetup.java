@@ -136,10 +136,6 @@ public class GameSetup {
 
     }
 
-    // 2 0 0 0
-    // 2 0 0 0
-    // 0 0 0 0
-    // 0 0 0 0
     public void combineTilesUp() {
         for (int col = 0; col < 4; col++) {
             for (int row = 0; row < 4; row++) {
