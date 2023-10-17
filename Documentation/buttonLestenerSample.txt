@@ -1,0 +1,38 @@
+  // these next integers are necessary because when setting action listener the values
+                //used have to be final - that means that the value of them will not change.
+                // i didnt get it fully but from what i understood with each iteration the ints
+                // iPask and jPask are created like new ints again so although it changes with each
+                // loop just like the i and j, they are not directly directly tied with loop
+
+                int iPask = i;
+                int jPask = j;
+
+                //WHEN PRESSED ON A BUTTON CREATES A BOARDER AND BUTTON CLOSE
+                // when pressed close changes the boarder to normal
+                // tries this out to see how we will be able to implement the
+                // select menu for bombing
+
+                buttons[i][j].addActionListener(new ActionListener() {
+                    @Override
+                public void actionPerformed(ActionEvent e) {
+                        buttons[iPask][jPask].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+                        JButton whatToDo = new JButton("Close", null); 
+                        whatToDo.setBounds(0, 30, 100, 20);
+                        whatToDo.setBackground(Color.RED);
+                        add(whatToDo);  
+                        revalidate();
+                        repaint(); 
+
+
+                        whatToDo.addActionListener(new ActionListener() {
+                            @Override
+                public void actionPerformed(ActionEvent e) {
+                            buttons[iPask][jPask].setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
+                                remove(whatToDo);
+                                revalidate();
+                                repaint();                
+                            }
+                        });
+
+                    }
+                });
