@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class GameSetup {
     private Tile[][] grid;
-    private int score;
+    private int score = 0;
 
     public GameSetup() {
         grid = new Tile[4][4];
@@ -16,6 +16,7 @@ public class GameSetup {
             }
         }
 
+<<<<<<< HEAD
         grid[0][0].setValue(2); // FOR TESTING ONLY, DELETE LATER
         grid[3][0].setValue(2); // FOR TESTING ONLY, DELETE LATER
         grid[2][1].setValue(4); // FOR TESTING ONLY, DELETE LATER
@@ -23,6 +24,19 @@ public class GameSetup {
         // grid[1][1].setValue(2); // delete later!!! only for testing
         // grid[1][2].setValue(4); // delete later!!! only for testing
         // grid[0][1].setValue(8); // delete later!!! only for testing
+=======
+        grid [0] [0].setValue(4);
+        grid [1] [0].setValue(2);
+        grid [0] [1].setValue(4);
+
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print(grid [i][j].getValue() + " ");
+            }
+            System.out.println();
+        }
+>>>>>>> SwingBoard
 
         // Maybe add here methods for the first Tiles to spawn
     }
@@ -176,4 +190,10 @@ public class GameSetup {
     public boolean checkVictory() {
         return false; // change later
     }
+
+    public Tile[][] getGrid(){
+
+        return grid;
+    }
+
 }
