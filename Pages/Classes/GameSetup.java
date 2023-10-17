@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class GameSetup {
     private Tile[][] grid;
-    private int score;
+    private int score = 0;
 
     public GameSetup() {
         grid = new Tile[4][4];
@@ -15,6 +15,11 @@ public class GameSetup {
                 grid[i][j] = new Tile(0);
             }
         }
+
+        grid [0] [0].setValue(4);
+        grid [1] [0].setValue(2);
+        grid [0] [1].setValue(4);
+
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -51,4 +56,10 @@ public class GameSetup {
     public boolean checkVictory() {
         return false; // change later
     }
+
+    public Tile[][] getGrid(){
+
+        return grid;
+    }
+
 }
