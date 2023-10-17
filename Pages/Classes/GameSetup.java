@@ -16,6 +16,14 @@ public class GameSetup {
             }
         }
 
+        grid[0][0].setValue(2); // FOR TESTING ONLY, DELETE LATER
+        grid[3][0].setValue(2); // FOR TESTING ONLY, DELETE LATER
+        grid[2][1].setValue(4); // FOR TESTING ONLY, DELETE LATER
+        grid[3][1].setValue(4); // FOR TESTING ONLY, DELETE LATER
+        // grid[1][1].setValue(2); // delete later!!! only for testing
+        // grid[1][2].setValue(4); // delete later!!! only for testing
+        // grid[0][1].setValue(8); // delete later!!! only for testing
+
         // Maybe add here methods for the first Tiles to spawn
     }
 
@@ -71,6 +79,8 @@ public class GameSetup {
                 }
             }
         }
+
+        combineTilesUp();
     }
 
     public void moveTilesDown() {
@@ -128,6 +138,29 @@ public class GameSetup {
 
     public void combineTiles() {
 
+    }
+
+    // 2 0 0 0
+    // 2 0 0 0
+    // 0 0 0 0
+    // 0 0 0 0
+    public void combineTilesUp() {
+        for (int col = 0; col < 4; col++) {
+            for (int row = 0; row < 4; row++) {
+                // Tile nextTile = new Tile(0);
+                // if (row != 3) {
+                // nextTilev = grid[row][col];
+                // }
+
+                if (grid[row][col].hasValue()) {
+                    if (grid[row][col].getValue() == grid[row + 1][col].getValue()) {
+                        grid[row][col].setValue(grid[row + 1][col].getValue() * 2);
+
+                        grid[row + 1][col].setValue(0);
+                    }
+                }
+            }
+        }
     }
 
     public void bombATile(Tile superTile, Tile tileToBomb) {

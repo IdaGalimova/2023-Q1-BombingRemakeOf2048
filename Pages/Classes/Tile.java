@@ -11,7 +11,6 @@ public class Tile {
         this.color = new Color(255,   0,   0); // change this later
     }
 
-    // My try on getter:
     public int getValue() {
         return this.value;
     } 
