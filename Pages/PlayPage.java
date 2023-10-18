@@ -6,6 +6,8 @@ import javax.swing.*;
 
 public class PlayPage extends JFrame {
     GameSetup gameSetup = new GameSetup();
+    
+
     Color darkBlue = new Color(0, 48, 73);
     Color sandy = new Color(234, 226, 183);
     Color yellow = new Color(252, 191, 73);
@@ -16,6 +18,8 @@ public class PlayPage extends JFrame {
 
     public PlayPage(JFrame previousFrame) {
         buttons = new JButton[4][4];
+
+        VictoryPage victoryPage = new VictoryPage();
         
         // Setting up main frame:
         setTitle("PLAYING GAME");
@@ -73,6 +77,7 @@ public class PlayPage extends JFrame {
                 gameSetup.moveTiles("left");
                 gameSetup.printGrid();
                 gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
+                gameSetup.printGrid();
                 redrawGrid();
 
             }
@@ -90,6 +95,7 @@ public class PlayPage extends JFrame {
                 gameSetup.moveTiles("right");
                 gameSetup.printGrid();
                 gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
+                gameSetup.printGrid();
                 redrawGrid();
             }
         });
@@ -106,7 +112,12 @@ public class PlayPage extends JFrame {
                 gameSetup.moveTiles("up");
                 gameSetup.printGrid();
                 gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
+                gameSetup.printGrid();
                 redrawGrid();
+                if (gameSetup.checkVictory()) {
+                    victoryPage.victoryPage();
+                    redrawGrid();
+                }
             }
         });
 
@@ -123,12 +134,16 @@ public class PlayPage extends JFrame {
                 gameSetup.moveTiles("down");
                 gameSetup.printGrid();
                 gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
+                gameSetup.printGrid();
                 redrawGrid();
+
+                
+                
             }
         });
 
 
-
+        
     }
 
     public void redrawGrid() {

@@ -19,7 +19,8 @@ public class GameSetup {
             }
         }
 
-        grid[1][0].setValue(4);
+        grid[0][0].setValue(1024);
+        grid[1][0].setValue(1024);
         grid[1][3].setValue(2);
         grid[1][1].setValue(8);
 
@@ -169,7 +170,19 @@ public class GameSetup {
 
     // Method to check if there is a tile with value "2048"
     public boolean checkVictory() {
-        return false; // change later
+
+        boolean checkVictory = false;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (getGrid()[i][j].getValue() == 2048 ) {
+                    checkVictory = true;
+                    resetGame();
+                    printGrid();
+                    break;
+                }
+            }
+        }
+        return checkVictory; 
     }
 
     public Tile[][] getGrid(){
@@ -177,6 +190,22 @@ public class GameSetup {
         return grid;
     }
 
+    // Method to check if there are any empty tiles left
+    public boolean checkIfFullGrid(){
+        boolean fullGrid = true;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (getGrid()[i][j].getValue() == 0) {
+                    fullGrid = false;
+                    break;
+                }
+            }
+        }
+
+        return fullGrid;
+    }
+
+    // Method to generate a random number 
     public int generateNumber(){
         int randNumber;
         int [] arrayOfValues = new int [100];
@@ -203,21 +232,23 @@ public class GameSetup {
 
     }
     
-
+    // Method to fill a random tile
     public Tile[][] fillTileWithRandomNumber (Tile[][]grid) {
 
-        Random rand = new Random();
-        
-        int randomRow = rand.nextInt(4);
-        int randomCol = rand.nextInt(4);
+        if (checkIfFullGrid() == false) {
 
-        if (grid[randomRow][randomCol].getValue() == 0) {
-            grid[randomRow][randomCol].setValue(generateNumber());
-        } else if (grid[randomRow][randomCol].getValue() != 0) {
-            fillTileWithRandomNumber(grid);
+            Random rand = new Random();
+            
+            int randomRow = rand.nextInt(4);
+            int randomCol = rand.nextInt(4);
+
+            if (grid[randomRow][randomCol].getValue() == 0) {
+                grid[randomRow][randomCol].setValue(generateNumber());
+            } else if (grid[randomRow][randomCol].getValue() != 0) {
+                fillTileWithRandomNumber(grid);
+            }
+
         }
-
-
 
 
         return grid;
@@ -242,7 +273,7 @@ public class GameSetup {
         }
 
         if (grid[row][col].getValue() > 8) {
-            grid[row][col].setColor(139,0,0);
+            grid[row][col].setColor(139, 0, 0);
         }
 
 
@@ -250,6 +281,17 @@ public class GameSetup {
 
 
         return grid;
+    }
+
+    public void resetGame() {
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                getGrid()[i][j].setValue(0);
+            }
+        }
+
+        fillTileWithRandomNumber(getGrid());
     }
 
 }
