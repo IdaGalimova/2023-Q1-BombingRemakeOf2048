@@ -67,9 +67,9 @@ public class PlayPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("left key pressed");
 
-                gameSetup.printGrid();
+                // gameSetup.printGrid();
                 gameSetup.moveTiles("left");
-                gameSetup.printGrid();
+                // gameSetup.printGrid();
 
                 redrawGrid();
             }
@@ -83,9 +83,9 @@ public class PlayPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("right key pressed");
 
-                gameSetup.printGrid();
+                // gameSetup.printGrid();
                 gameSetup.moveTiles("right");
-                gameSetup.printGrid();
+                // gameSetup.printGrid();
 
                 redrawGrid();
             }
@@ -99,9 +99,9 @@ public class PlayPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("up key pressed");
 
-                gameSetup.printGrid();
+                // gameSetup.printGrid();
                 gameSetup.moveTiles("up");
-                gameSetup.printGrid();
+                // gameSetup.printGrid();
 
                 redrawGrid();
             }
@@ -116,9 +116,9 @@ public class PlayPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("down key pressed");
 
-                gameSetup.printGrid();
+                // gameSetup.printGrid();
                 gameSetup.moveTiles("down");
-                gameSetup.printGrid();
+                // gameSetup.printGrid();
 
                 redrawGrid();
             }

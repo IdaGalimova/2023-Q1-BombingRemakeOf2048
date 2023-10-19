@@ -20,8 +20,6 @@ public class GameSetup {
         grid[1][3].setValue(2);
         grid[1][1].setValue(8);
 
-        // grid[1][1].setValue(8);
-
         // Maybe add here methods for the first Tiles to spawn
     }
 
