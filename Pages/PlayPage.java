@@ -6,14 +6,20 @@ import javax.swing.*;
 
 public class PlayPage extends JFrame {
     GameSetup gameSetup = new GameSetup();
-    Color darkBlue = new Color(38, 70, 83);
-    Color mustardYellow = new Color(233, 198, 74);
-    Color aqua = new Color(42, 157, 143);
+    
+
+    Color darkBlue = new Color(0, 48, 73);
+    Color sandy = new Color(234, 226, 183);
+    Color yellow = new Color(252, 191, 73);
+    Color red = new Color(214, 40, 40);
+    Color orange = new Color(247, 127, 0);
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 30);
     JButton[][] buttons;
 
     public PlayPage(JFrame previousFrame) {
         buttons = new JButton[4][4];
+
+        VictoryPage victoryPage = new VictoryPage();
         
         // Setting up main frame:
         setTitle("PLAYING GAME");
@@ -25,7 +31,7 @@ public class PlayPage extends JFrame {
         // Setting up back button:
         JButton backButton = new JButton("Go Back");
         backButton.setBounds(0, 0, 100, 20);
-        backButton.setBackground(aqua);
+        backButton.setBackground(yellow);
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,12 +48,12 @@ public class PlayPage extends JFrame {
             for (int j = 0; j < 4; j++) {
 
                 buttons[i][j] = new JButton("" + gameSetup.getGrid()[i][j].getValue());
-                buttons[i][j].setBackground(aqua);
-                buttons[i][j].setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
+                gameSetup.determineTileColor(gameSetup.getGrid(), i, j);
+                buttons[i][j].setBackground(gameSetup.getGrid()[i][j].getColor());
+                buttons[i][j].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
 
                 if (gameSetup.getGrid()[i][j].getValue() == 0) {
                     buttons[i][j].setText("");
-                    buttons[i][j].setBackground(mustardYellow);
                 }
                 buttons[i][j].setFont(moonspaced);
 
@@ -70,8 +76,9 @@ public class PlayPage extends JFrame {
                 // gameSetup.printGrid();
                 gameSetup.moveTiles("left");
                 // gameSetup.printGrid();
-
+                gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
                 redrawGrid();
+
             }
         });
 
@@ -83,10 +90,8 @@ public class PlayPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("right key pressed");
 
-                // gameSetup.printGrid();
                 gameSetup.moveTiles("right");
-                // gameSetup.printGrid();
-
+                gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
                 redrawGrid();
             }
         });
@@ -99,11 +104,14 @@ public class PlayPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("up key pressed");
 
-                // gameSetup.printGrid();
                 gameSetup.moveTiles("up");
-                // gameSetup.printGrid();
-
+                gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
                 redrawGrid();
+                
+                if (gameSetup.checkVictory()) {
+                    victoryPage.victoryPage();
+                    redrawGrid();
+                }
             }
         });
 
@@ -116,27 +124,32 @@ public class PlayPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("down key pressed");
 
-                // gameSetup.printGrid();
                 gameSetup.moveTiles("down");
-                // gameSetup.printGrid();
-
+                gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
                 redrawGrid();
+
+                
             }
         });
+
+
+        
     }
 
     public void redrawGrid() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 buttons[i][j].setText("" + gameSetup.getGrid()[i][j].getValue());
-                buttons[i][j].setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
+                buttons[i][j].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
                 if (gameSetup.getGrid()[i][j].getValue() != 0) {
-                    buttons[i][j].setBackground(aqua);
+                    gameSetup.determineTileColor(gameSetup.getGrid(), i, j);
+                    buttons[i][j].setBackground(gameSetup.getGrid()[i][j].getColor());
                 }
 
                 if (gameSetup.getGrid()[i][j].getValue() == 0) {
+                    gameSetup.determineTileColor(gameSetup.getGrid(), i, j);
+                    buttons[i][j].setBackground(gameSetup.getGrid()[i][j].getColor());
                     buttons[i][j].setText("");
-                    buttons[i][j].setBackground(mustardYellow);
                 }
 
             }
