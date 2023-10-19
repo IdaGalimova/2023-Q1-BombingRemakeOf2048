@@ -20,6 +20,8 @@ public class GameSetup {
         grid[1][3].setValue(2);
         grid[1][1].setValue(8);
 
+        // grid[1][1].setValue(8);
+
         // Maybe add here methods for the first Tiles to spawn
     }
 
@@ -50,12 +52,21 @@ public class GameSetup {
     public void moveTiles(String direction) {
         if (direction == "up") {
             moveTilesUp();
+            combineTilesUp();
+            moveTilesUp();
         } else if (direction == "down") {
+            moveTilesDown();
+            combineTilesDown();
             moveTilesDown();
         } else if (direction == "right") {
             moveTilesRight();
+            combineTilesRight();
+            moveTilesRight();
         } else if (direction == "left") {
             moveTilesLeft();
+            combineTilesLeft();
+            moveTilesLeft();
+
         }
     }
 
@@ -75,8 +86,6 @@ public class GameSetup {
                 }
             }
         }
-
-        combineTilesUp();
     }
 
     public void moveTilesDown() {
@@ -93,7 +102,6 @@ public class GameSetup {
                     }
                     count--;
                 }
-
             }
         }
     }
@@ -136,10 +144,6 @@ public class GameSetup {
 
     }
 
-    // 2 0 0 0
-    // 2 0 0 0
-    // 0 0 0 0
-    // 0 0 0 0
     public void combineTilesUp() {
         for (int col = 0; col < 4; col++) {
             for (int row = 0; row < 4; row++) {
@@ -153,6 +157,52 @@ public class GameSetup {
                         grid[row][col].setValue(grid[row + 1][col].getValue() * 2);
 
                         grid[row + 1][col].setValue(0);
+                    }
+                }
+            }
+        }
+    }
+
+    public void combineTilesDown() {
+        for (int col = 0; col < 4; col++) {
+            for (int row = 3; row >= 0; row--) {
+                if (grid[row][col].hasValue()) {
+                    if (grid[row][col].getValue() == grid[row - 1][col].getValue()) {
+                        grid[row][col].setValue(grid[row - 1][col].getValue() * 2);
+
+                        grid[row - 1][col].setValue(0);
+                    }
+                }
+            }
+        }
+    }
+
+    public void combineTilesRight() {
+        for (int row = 0; row < 4; row++) {
+            for (int col = 3; col >= 0; col--) {
+                if (grid[row][col].hasValue()) {
+                    if (grid[row][col].getValue() == grid[row][col - 1].getValue()) {
+                        grid[row][col].setValue(grid[row][col - 1].getValue() * 2);
+
+                        grid[row][col - 1].setValue(0);
+                    }
+                }
+            }
+        }
+    }
+
+    // 2 2 0 0
+    // 0 0 0 0
+    // 0 0 0 0
+    // 0 0 0 0
+    public void combineTilesLeft() {
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 4; col++) {
+                if (grid[row][col].hasValue()) {
+                    if (grid[row][col].getValue() == grid[row][col + 1].getValue()) {
+                        grid[row][col].setValue(grid[row][col + 1].getValue() * 2);
+
+                        grid[row][col + 1].setValue(0);
                     }
                 }
             }
@@ -173,7 +223,7 @@ public class GameSetup {
         return false; // change later
     }
 
-    public Tile[][] getGrid(){
+    public Tile[][] getGrid() {
 
         return grid;
     }
