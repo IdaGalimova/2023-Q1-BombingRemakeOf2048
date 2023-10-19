@@ -73,9 +73,7 @@ public class PlayPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("left key pressed");
 
-                // gameSetup.printGrid();
                 gameSetup.moveTiles("left");
-                // gameSetup.printGrid();
                 gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
                 redrawGrid();
 
