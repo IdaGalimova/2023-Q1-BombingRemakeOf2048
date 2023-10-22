@@ -4,13 +4,14 @@ import java.util.Random;
 import java.awt.Color;
 
 public class GameSetup {
-
+    private ColorManager colorManager;
     private Tile[][] grid;
     private int score = 0;
 
     public GameSetup() {
         grid = new Tile[4][4];
         score = 0;
+        colorManager = new ColorManager(0); // CHANGE MODE HERE LATER
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
