@@ -24,6 +24,10 @@ public class GameSetup {
         grid[1][3].setValue(2);
         grid[1][1].setValue(8);
 
+        // grid[3][1].setValue(2);
+        // grid[2][1].setValue(2);
+        // grid[3][3].setValue(4);
+
         // Maybe add here methods for the first Tiles to spawn
     }
 
@@ -52,24 +56,27 @@ public class GameSetup {
     }
 
     public void moveTiles(String direction) {
-        if (direction == "up") {
-            moveTilesUp();
-            combineTilesUp();
-            moveTilesUp();
-        } else if (direction == "down") {
-            moveTilesDown();
-            combineTilesDown();
-            moveTilesDown();
-        } else if (direction == "right") {
-            moveTilesRight();
-            combineTilesRight();
-            moveTilesRight();
-        } else if (direction == "left") {
-            moveTilesLeft();
-            combineTilesLeft();
-            moveTilesLeft();
-
+        if (canMove(direction)) {
+            if (direction == "up") {
+                moveTilesUp();
+                combineTilesUp();
+                moveTilesUp();
+            } else if (direction == "down") {
+                moveTilesDown();
+                combineTilesDown();
+                moveTilesDown();
+            } else if (direction == "right") {
+                moveTilesRight();
+                combineTilesRight();
+                moveTilesRight();
+            } else if (direction == "left") {
+                moveTilesLeft();
+                combineTilesLeft();
+                moveTilesLeft();
+            }
+            fillTileWithRandomNumber();
         }
+
     }
 
     public void moveTilesUp() {
@@ -229,6 +236,84 @@ public class GameSetup {
         return false; // change later
     }
 
+    public boolean canMove(String direction) {
+        if (direction == "left") {
+            return canMoveLeft();
+        } else if (direction == "right") {
+            return canMoveRight();
+        } else if (direction == "up") {
+            return canMoveUp();
+        } else if (direction == "down") {
+            return canMoveDown();
+        }
+
+        return false;
+    }
+
+    public boolean canMoveLeft() {
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 3; col++) {
+                if (grid[row][col].getValue() == 0 && grid[row][col + 1].hasValue()) {
+                    return true;
+                }
+
+                if (grid[row][col].hasValue()
+                        && grid[row][col].getValue() == grid[row][col + 1].getValue()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean canMoveRight() {
+        for (int row = 0; row < 4; row++) {
+            for (int col = 3; col > 0; col--) {
+                if (grid[row][col].getValue() == 0 && grid[row][col - 1].hasValue()) {
+                    return true;
+                }
+
+                if (grid[row][col].hasValue()
+                        && grid[row][col].getValue() == grid[row][col - 1].getValue()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean canMoveUp() {
+        for (int col = 0; col < 4; col++) {
+            for (int row = 0; row < 3; row++) {
+                if (grid[row][col].getValue() == 0 && grid[row + 1][col].hasValue()) {
+                    return true;
+                }
+
+                if (grid[row][col].hasValue()
+                        && grid[row][col].getValue() == grid[row + 1][col].getValue()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean canMoveDown() {
+        for (int col = 0; col < 4; col++) {
+            for (int row = 3; row > 0; row--) {
+                if (grid[row][col].getValue() == 0 && grid[row - 1][col].hasValue()) {
+                    return true;
+                }
+
+                if (grid[row][col].hasValue()
+                        && grid[row][col].getValue() == grid[row - 1][col].getValue()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // Method to check if there is a tile with value "2048"
     public boolean checkVictory() {
 
@@ -294,10 +379,9 @@ public class GameSetup {
     }
 
     // Method to fill a random tile
-    public Tile[][] fillTileWithRandomNumber(Tile[][] grid) {
+    public Tile[][] fillTileWithRandomNumber() {
 
-        if (checkIfFullGrid() == false) {
-
+        if (!checkIfFullGrid()) {
             Random rand = new Random();
 
             int randomRow = rand.nextInt(4);
@@ -306,7 +390,7 @@ public class GameSetup {
             if (grid[randomRow][randomCol].getValue() == 0) {
                 grid[randomRow][randomCol].setValue(generateNumber());
             } else if (grid[randomRow][randomCol].getValue() != 0) {
-                fillTileWithRandomNumber(grid);
+                fillTileWithRandomNumber();
             }
 
         }
@@ -347,7 +431,9 @@ public class GameSetup {
             }
         }
 
-        fillTileWithRandomNumber(getGrid());
+        fillTileWithRandomNumber();
+        fillTileWithRandomNumber();
+
     }
 
 }

@@ -74,7 +74,6 @@ public class PlayPage extends JFrame {
                 System.out.println("left key pressed");
 
                 gameSetup.moveTiles("left");
-                gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
                 redrawGrid();
 
             }
@@ -89,7 +88,6 @@ public class PlayPage extends JFrame {
                 System.out.println("right key pressed");
 
                 gameSetup.moveTiles("right");
-                gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
                 redrawGrid();
             }
         });
@@ -103,7 +101,6 @@ public class PlayPage extends JFrame {
                 System.out.println("up key pressed");
 
                 gameSetup.moveTiles("up");
-                gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
                 redrawGrid();
                 
                 if (gameSetup.checkVictory()) {
@@ -123,15 +120,11 @@ public class PlayPage extends JFrame {
                 System.out.println("down key pressed");
 
                 gameSetup.moveTiles("down");
-                gameSetup.fillTileWithRandomNumber(gameSetup.getGrid());
                 redrawGrid();
-
                 
             }
         });
 
-
-        
     }
 
     public void redrawGrid() {

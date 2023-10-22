@@ -13,7 +13,7 @@ public class MainGame {
         System.out.println();
         gameSetup.printGrid();
 
-        gameSetup.moveTiles("right");
+        gameSetup.moveTiles("down");
         gameSetup.printGrid();
         
         // gameSetup.moveTiles("down");
