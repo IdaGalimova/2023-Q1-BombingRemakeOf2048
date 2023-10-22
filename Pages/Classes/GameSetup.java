@@ -24,10 +24,6 @@ public class GameSetup {
         grid[1][3].setValue(2);
         grid[1][1].setValue(8);
 
-        // grid[3][1].setValue(2);
-        // grid[2][1].setValue(2);
-        // grid[3][3].setValue(4);
-
         // Maybe add here methods for the first Tiles to spawn
     }
 
@@ -51,10 +47,6 @@ public class GameSetup {
         System.out.println(splitterLine);
     }
 
-    public Tile[][] copyGrid() { // probably dont need this one
-        return grid;
-    }
-
     public void moveTiles(String direction) {
         if (canMove(direction)) {
             if (direction == "up") {
@@ -76,7 +68,6 @@ public class GameSetup {
             }
             fillTileWithRandomNumber();
         }
-
     }
 
     public void moveTilesUp() {
@@ -149,7 +140,8 @@ public class GameSetup {
         }
     }
 
-    public void combineTiles() {
+    public void combineTiles() { // probably dont need this one as we are using separate
+                                 // methods for combining tiles
 
     }
 
@@ -229,11 +221,6 @@ public class GameSetup {
 
     public void bombATile(Tile superTile, Tile tileToBomb) {
 
-    }
-
-    // Method to check if there are any available moves left
-    public boolean hasAvailableMoves() {
-        return false; // change later
     }
 
     public boolean canMove(String direction) {
@@ -316,7 +303,6 @@ public class GameSetup {
 
     // Method to check if there is a tile with value "2048"
     public boolean checkVictory() {
-
         boolean checkVictory = false;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -332,23 +318,38 @@ public class GameSetup {
     }
 
     public Tile[][] getGrid() {
-
         return grid;
     }
 
     // Method to check if there are any empty tiles left
     public boolean checkIfFullGrid() {
-        boolean fullGrid = true;
+        boolean isFull = true;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (getGrid()[i][j].getValue() == 0) {
-                    fullGrid = false;
+                    isFull = false;
                     break;
                 }
             }
         }
 
-        return fullGrid;
+        return isFull;
+    }
+
+    // Method to check if there are any available moves left
+    public boolean hasAvailableMoves() {
+        if (!canMoveDown() && !canMoveUp() && !canMoveLeft() && !canMoveRight()) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkGameOver() {
+        if (checkIfFullGrid() && !hasAvailableMoves()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Method to generate a random number
@@ -375,12 +376,10 @@ public class GameSetup {
         randNumber = arrayOfValues[randomInt];
 
         return randNumber;
-
     }
 
     // Method to fill a random tile
     public Tile[][] fillTileWithRandomNumber() {
-
         if (!checkIfFullGrid()) {
             Random rand = new Random();
 
@@ -399,7 +398,6 @@ public class GameSetup {
     }
 
     public Tile[][] determineTileColor(Tile[][] grid, int row, int col) {
-
         if (grid[row][col].getValue() == 0) {
             grid[row][col].setColor(234, 226, 183);
         }
@@ -424,7 +422,6 @@ public class GameSetup {
     }
 
     public void resetGame() {
-
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 getGrid()[i][j].setValue(0);
@@ -433,7 +430,6 @@ public class GameSetup {
 
         fillTileWithRandomNumber();
         fillTileWithRandomNumber();
-
     }
 
 }

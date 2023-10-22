@@ -6,7 +6,6 @@ import javax.swing.*;
 
 public class PlayPage extends JFrame {
     GameSetup gameSetup = new GameSetup();
-    
 
     Color darkBlue = new Color(0, 48, 73);
     Color sandy = new Color(234, 226, 183);
@@ -20,7 +19,8 @@ public class PlayPage extends JFrame {
         buttons = new JButton[4][4];
 
         VictoryPage victoryPage = new VictoryPage();
-        
+        GameOverPage gameOverPage = new GameOverPage();
+
         // Setting up main frame:
         setTitle("PLAYING GAME");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +42,6 @@ public class PlayPage extends JFrame {
 
         JPanel panel = new JPanel(new GridLayout(4, 4));
         panel.setBounds(90, 80, 400, 400);
-
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -76,6 +75,10 @@ public class PlayPage extends JFrame {
                 gameSetup.moveTiles("left");
                 redrawGrid();
 
+                if (gameSetup.checkGameOver()) {
+                    gameOverPage.runGameOver();
+                }
+
             }
         });
 
@@ -89,6 +92,11 @@ public class PlayPage extends JFrame {
 
                 gameSetup.moveTiles("right");
                 redrawGrid();
+
+                if (gameSetup.checkGameOver()) {
+                    gameOverPage.runGameOver();
+                    redrawGrid();
+                }
             }
         });
 
@@ -102,14 +110,18 @@ public class PlayPage extends JFrame {
 
                 gameSetup.moveTiles("up");
                 redrawGrid();
-                
+
+                if (gameSetup.checkGameOver()) {
+                    gameOverPage.runGameOver();
+                    redrawGrid();
+                }
+
                 if (gameSetup.checkVictory()) {
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
             }
         });
-
 
         // Moving tiles down:
         contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
@@ -121,7 +133,11 @@ public class PlayPage extends JFrame {
 
                 gameSetup.moveTiles("down");
                 redrawGrid();
-                
+
+                if (gameSetup.checkGameOver()) {
+                    gameOverPage.runGameOver();
+                    redrawGrid();
+                }
             }
         });
 
