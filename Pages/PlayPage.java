@@ -47,9 +47,9 @@ public class PlayPage extends JFrame {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
+                // we need to figure out how to pass the mode here
                 ColorManager colorManager = new ColorManager(1);
                 buttons[i][j] = new JButton("" + gameSetup.getGrid()[i][j].getValue());
-                //gameSetup.determineTileColor(gameSetup.getGrid(), i, j);
                 colorManager.determineColor(gameSetup.getTileInGrid(i, j));
                 System.out.println();
                 buttons[i][j].setBackground(gameSetup.getGrid()[i][j].getColor());
@@ -158,6 +158,7 @@ public class PlayPage extends JFrame {
     public void redrawGrid() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
+                // we need to figure out how to pass the mode here
                 ColorManager colorManager = new ColorManager(1);
                 buttons[i][j].setText("" + gameSetup.getGrid()[i][j].getValue());
                 buttons[i][j].setBorder(BorderFactory.createLineBorder(darkBlue, 2));

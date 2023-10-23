@@ -325,31 +325,6 @@ public class GameSetup {
 
         return grid;
     }
-/* 
-    public Tile[][] determineTileColor(Tile[][] grid, int row, int col) {
-
-        if (grid[row][col].getValue() == 0) {
-            grid[row][col].setColor(234, 226, 183);
-        }
-
-        if (grid[row][col].getValue() == 2) {
-            grid[row][col].setColor(252, 191, 73);
-        }
-
-        if (grid[row][col].getValue() == 4) {
-            grid[row][col].setColor(247, 127, 0);
-        }
-
-        if (grid[row][col].getValue() == 8) {
-            grid[row][col].setColor(214, 40, 40);
-        }
-
-        if (grid[row][col].getValue() > 8) {
-            grid[row][col].setColor(139, 0, 0);
-        }
-
-        return grid;
-    } */
 
     public void resetGame() {
 
