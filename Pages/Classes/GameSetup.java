@@ -6,7 +6,7 @@ import java.awt.Color;
 public class GameSetup {
     private ColorManager colorManager;
     private Tile[][] grid;
-    private int score = 0;
+    private int score;
 
     public GameSetup() {
         grid = new Tile[4][4];
@@ -19,16 +19,18 @@ public class GameSetup {
             }
         }
 
-        grid[0][0].setValue(1024);
-        grid[1][0].setValue(1024);
-        grid[1][3].setValue(2);
-        grid[1][1].setValue(8);
+        // grid[0][0].setValue(1024);
+        // grid[1][0].setValue(1024);
+        // grid[1][3].setValue(2);
+        // grid[1][1].setValue(8);
 
-        // Maybe add here methods for the first Tiles to spawn
+        grid[2][1].setValue(2);
+        grid[3][3].setValue(2);
+
     }
 
-    public void spawnNewTile() {
-
+    public int getScore() {
+        return score;
     }
 
     public void printGrid() {
@@ -154,6 +156,7 @@ public class GameSetup {
                 }
                 if (grid[row][col].hasValue()) {
                     if (grid[row][col].getValue() == nextTileValue) {
+                        score += 2 * grid[row][col].getValue();
                         grid[row][col].setValue(grid[row][col].getValue() * 2);
 
                         grid[row + 1][col].setValue(0);
@@ -172,6 +175,7 @@ public class GameSetup {
                 }
                 if (grid[row][col].hasValue()) {
                     if (grid[row][col].getValue() == nextTileValue) {
+                        score += 2 * grid[row][col].getValue();
                         grid[row][col].setValue(grid[row][col].getValue() * 2);
 
                         grid[row - 1][col].setValue(0);
@@ -191,6 +195,7 @@ public class GameSetup {
                 if (grid[row][col].hasValue()) {
 
                     if (grid[row][col].getValue() == nextTileValue) {
+                        score += 2 * grid[row][col].getValue();
                         grid[row][col].setValue(grid[row][col].getValue() * 2);
 
                         grid[row][col - 1].setValue(0);
@@ -210,6 +215,7 @@ public class GameSetup {
                 if (grid[row][col].hasValue()) {
 
                     if (grid[row][col].getValue() == nextTileValue) {
+                        score += 2 * grid[row][col].getValue();
                         grid[row][col].setValue(grid[row][col].getValue() * 2);
 
                         grid[row][col + 1].setValue(0);
@@ -346,6 +352,7 @@ public class GameSetup {
 
     public boolean checkGameOver() {
         if (checkIfFullGrid() && !hasAvailableMoves()) {
+            resetGame();
             return true;
         } else {
             return false;
@@ -387,7 +394,9 @@ public class GameSetup {
             int randomCol = rand.nextInt(4);
 
             if (grid[randomRow][randomCol].getValue() == 0) {
-                grid[randomRow][randomCol].setValue(generateNumber());
+                int randomValue = generateNumber();
+                grid[randomRow][randomCol].setValue(randomValue);
+                // score += randomValue;
             } else if (grid[randomRow][randomCol].getValue() != 0) {
                 fillTileWithRandomNumber();
             }

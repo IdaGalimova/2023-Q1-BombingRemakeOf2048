@@ -13,8 +13,11 @@ public class PlayPage extends JFrame {
     Color red = new Color(214, 40, 40);
     Color orange = new Color(247, 127, 0);
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 30);
-    JButton[][] buttons;
+    Font scroreFont = new Font("Monospaced", Font.ITALIC | Font.BOLD, 15);
 
+    JButton[][] buttons;
+    JLabel scoreLabel = new JLabel();
+    String scoreString = "Score: ";
     public PlayPage(JFrame previousFrame) {
         buttons = new JButton[4][4];
 
@@ -27,6 +30,13 @@ public class PlayPage extends JFrame {
         setSize(600, 600);
         setLayout(null);
         getContentPane().setBackground(darkBlue);
+
+        // Setting up score:
+        scoreLabel.setText(scoreString + gameSetup.getScore());
+        scoreLabel.setFont(scroreFont);
+        scoreLabel.setForeground(orange);
+        scoreLabel.setBounds(400, 0, 200, 20);
+        add(scoreLabel);
 
         // Setting up back button:
         JButton backButton = new JButton("Go Back");
@@ -78,7 +88,7 @@ public class PlayPage extends JFrame {
                 if (gameSetup.checkGameOver()) {
                     gameOverPage.runGameOver();
                 }
-
+                scoreLabel.setText(scoreString + gameSetup.getScore());
             }
         });
 
@@ -97,6 +107,8 @@ public class PlayPage extends JFrame {
                     gameOverPage.runGameOver();
                     redrawGrid();
                 }
+
+                scoreLabel.setText(scoreString + gameSetup.getScore());
             }
         });
 
@@ -120,6 +132,8 @@ public class PlayPage extends JFrame {
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
+
+                scoreLabel.setText(scoreString + gameSetup.getScore());
             }
         });
 
@@ -138,6 +152,7 @@ public class PlayPage extends JFrame {
                     gameOverPage.runGameOver();
                     redrawGrid();
                 }
+                scoreLabel.setText(scoreString + gameSetup.getScore());
             }
         });
 

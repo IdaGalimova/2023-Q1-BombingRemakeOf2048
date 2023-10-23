@@ -8,9 +8,8 @@ import javax.swing.*;
 
 public class VictoryPage {
 
-    public VictoryPage (){
+    public VictoryPage() {
         
-
     }
 
     Color darkBlue = new Color(0, 48, 73);
@@ -21,7 +20,6 @@ public class VictoryPage {
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 45);
 
     public void victoryPage() {
-
         // Setting up victory frame:
         JFrame victoryFrame = new JFrame();
         victoryFrame.setTitle("VICTORY");

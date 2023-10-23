@@ -2,12 +2,8 @@ package Classes;
 import java.awt.Color;
 
 public class Tile {
-
-
     private int value;
     private Color color;
-
-
 
     // When initializing a Tile it should assign a color depending on its value
     public Tile(int value) {

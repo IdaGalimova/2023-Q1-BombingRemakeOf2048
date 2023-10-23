@@ -11,19 +11,26 @@ public class MainGame {
     void run() {
         System.out.println("Start of the game:");
         System.out.println();
+        
         gameSetup.printGrid();
+        System.out.println(gameSetup.getScore());
+
+
+        gameSetup.moveTiles("up");
+        gameSetup.printGrid();
+
+        System.out.println(gameSetup.getScore());
+
+
+        gameSetup.moveTiles("right");
+        gameSetup.printGrid();
+
+        System.out.println(gameSetup.getScore());
 
         gameSetup.moveTiles("down");
         gameSetup.printGrid();
-        
-        // gameSetup.moveTiles("down");
-        // gameSetup.printGrid();
 
-        // gameSetup.moveTiles("right");
-        // gameSetup.printGrid();
-
-        // gameSetup.moveTiles("up");
-        // gameSetup.printGrid();
+        System.out.println(gameSetup.getScore());
 
         // gameSetup.moveTiles("left");
         // gameSetup.printGrid();
