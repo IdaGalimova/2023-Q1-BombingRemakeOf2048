@@ -19,11 +19,6 @@ public class GameSetup {
             }
         }
 
-        // grid[0][0].setValue(1024);
-        // grid[1][0].setValue(1024);
-        // grid[1][3].setValue(2);
-        // grid[1][1].setValue(8);
-
         grid[2][1].setValue(2);
         grid[3][3].setValue(2);
 
@@ -436,6 +431,7 @@ public class GameSetup {
                 getGrid()[i][j].setValue(0);
             }
         }
+        score = 0;
 
         fillTileWithRandomNumber();
         fillTileWithRandomNumber();
