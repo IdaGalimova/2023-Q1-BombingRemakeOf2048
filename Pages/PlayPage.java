@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class PlayPage extends JFrame {
+public class PlayPage  {
     GameSetup gameSetup = new GameSetup();
 
     Color darkBlue = new Color(0, 48, 73);
@@ -19,27 +19,38 @@ public class PlayPage extends JFrame {
     JButton[][] buttons;
     JLabel scoreLabel = new JLabel();
     String scoreString = "Score: ";
-    public PlayPage(JFrame previousFrame) {
+
+    ColorManager colorManager;
+
+    public PlayPage(ColorManager colorManager) {
+        this.colorManager = colorManager;
+    }
+    
+    public void playPage() {
+
+        
         buttons = new JButton[4][4];
 
-        VictoryPage victoryPage = new VictoryPage();
-        GameOverPage gameOverPage = new GameOverPage();
+        VictoryPage victoryPage = new VictoryPage(colorManager);
+        GameOverPage gameOverPage = new GameOverPage(colorManager);
 
         
         
         // Setting up main frame:
-        setTitle("PLAYING GAME");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 600);
-        setLayout(null);
-        getContentPane().setBackground(darkBlue);
+        JFrame playFrame = new JFrame();
+        playFrame.setTitle("PLAYING GAME");
+        playFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        playFrame.setSize(600, 600);
+        playFrame.setLayout(null);
+        playFrame.getContentPane().setBackground(darkBlue);
+        playFrame.setVisible(true);
 
         // Setting up score:
         scoreLabel.setText(scoreString + gameSetup.getScore());
         scoreLabel.setFont(scroreFont);
         scoreLabel.setForeground(orange);
         scoreLabel.setBounds(400, 0, 200, 20);
-        add(scoreLabel);
+        playFrame.add(scoreLabel);
 
         // Setting up back button:
         JButton backButton = new JButton("Go Back");
@@ -48,18 +59,37 @@ public class PlayPage extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                previousFrame.setVisible(true);
+                playFrame.setVisible(false);
+                playFrame.dispose();
+                StartPage startPage = new StartPage(colorManager);
             }
         });
 
+        // Setting up panel to show the SuperTile abilities
+
+        JPanel sidePanel = new JPanel();
+        sidePanel.setBounds(520, 80, 60, 400); 
+        sidePanel.setBackground(Color.BLUE); 
+        sidePanel.setVisible(false); 
+        playFrame.add(sidePanel);
+
+        // Setting up the close button for the side panel
+
+        JButton closeButton = new JButton("Close");
+        sidePanel.add(closeButton);
+        closeButton.setBounds(10, 10, 40, 20);
+
         JPanel panel = new JPanel(new GridLayout(4, 4));
-        panel.setBounds(90, 80, 400, 400);
+        panel.setBounds(100, 100, 400, 400);
+
+        playFrame.add(backButton);
+        playFrame.add(panel);
+        
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 // we need to figure out how to pass the mode here
-                ColorManager colorManager = new ColorManager(1);
+                
                 buttons[i][j] = new JButton("" + gameSetup.getGrid()[i][j].getValue());
                 colorManager.determineColor(gameSetup.getTileInGrid(i, j));
                 System.out.println();
@@ -72,16 +102,38 @@ public class PlayPage extends JFrame {
                 buttons[i][j].setFont(moonspaced);
 
                 panel.add(buttons[i][j]);
+
+                buttons[i][j].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        sidePanel.setVisible(true); // Show the side panel when a button is clicked
+
+                          
+                        closeButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                sidePanel.setVisible(false);
+                                playFrame.remove(closeButton);  
+                            }
+                        });
+                    }
+                });
+
+                playFrame.revalidate();
+                playFrame.repaint();
             }
         }
 
-        add(backButton);
-        add(panel);
+        
+
+        
+
+        
 
         // Moving tiles to the left:
-        JComponent contentPane = (JComponent) getContentPane();
+        JComponent contentPane = (JComponent) playFrame.getContentPane();
         contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
-                KeyStroke.getKeyStroke("LEFT"), "leftKey");
+            KeyStroke.getKeyStroke("LEFT"), "leftKey");
         contentPane.getActionMap().put("leftKey", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,7 +148,7 @@ public class PlayPage extends JFrame {
                 scoreLabel.setText(scoreString + gameSetup.getScore());
                 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage();
+                    VictoryPage victoryPage = new VictoryPage(colorManager);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
@@ -123,7 +175,7 @@ public class PlayPage extends JFrame {
                 scoreLabel.setText(scoreString + gameSetup.getScore());
 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage();
+                    VictoryPage victoryPage = new VictoryPage(colorManager);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
@@ -147,7 +199,7 @@ public class PlayPage extends JFrame {
                 }
 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage();
+                    VictoryPage victoryPage = new VictoryPage(colorManager);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
@@ -174,7 +226,7 @@ public class PlayPage extends JFrame {
                 scoreLabel.setText(scoreString + gameSetup.getScore());
                 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage();
+                    VictoryPage victoryPage = new VictoryPage(colorManager);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
@@ -188,7 +240,6 @@ public class PlayPage extends JFrame {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 // we need to figure out how to pass the mode here
-                ColorManager colorManager = new ColorManager(1);
                 buttons[i][j].setText("" + gameSetup.getGrid()[i][j].getValue());
                 buttons[i][j].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
                 if (gameSetup.getGrid()[i][j].getValue() != 0) {

@@ -9,7 +9,7 @@ import javax.swing.*;
 public class SettingsPage {
     
     GameSetup gameSetup = new GameSetup();
-
+    private ColorManager colorManager;
     JLabel messageLabel;
     Timer timer = new Timer(1000, new ActionListener() {
         @Override
@@ -27,7 +27,9 @@ public class SettingsPage {
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 15);
 
     
-    public void settingsPage(){
+    public void settingsPage(ColorManager colorManager){
+        this.colorManager = colorManager;
+
         JFrame settingsFrame = new JFrame();
         settingsFrame.setTitle("PLAYING GAME");
         settingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,7 +54,7 @@ public class SettingsPage {
             public void actionPerformed(ActionEvent e) {
                 settingsFrame.setVisible(false);
                 settingsFrame.dispose();
-                StartPage startPage = new StartPage();
+                StartPage startPage = new StartPage(colorManager);
             }
         });
         settingsFrame.add(backButton);
@@ -66,7 +68,7 @@ public class SettingsPage {
             public void actionPerformed(ActionEvent e) {
                     //   tried out animation. conclusion - it sucks 
                     {
-                        ColorManager colorManager = new ColorManager(1);
+                        colorManager.setMode(1);
                         messageLabel.setText("Light Mode Activated!");
                         messageLabel.setBounds(150, 200, 300, 30);
                         if (timer != null && timer.isRunning()) {
@@ -87,7 +89,7 @@ public class SettingsPage {
             public void actionPerformed(ActionEvent e) {
                     //   tried out animation. conclusion - it sucks 
                     {
-                        ColorManager colorManager = new ColorManager(2);
+                        colorManager.setMode(2);
                         messageLabel.setText("Dark Mode Activated!");
                         messageLabel.setBounds(300, 200, 300, 30);
                         if (timer != null && timer.isRunning()) {

@@ -4,9 +4,16 @@ import java.awt.Color;
 
 public class ColorManager {
 
-    private int mode = 2;
+    private int mode = 1;
 
     public ColorManager(int mode) {
+        this.mode = mode;
+    }
+    public ColorManager () {
+        
+    }
+
+    public void setMode(int mode) {
         this.mode = mode;
     }
 

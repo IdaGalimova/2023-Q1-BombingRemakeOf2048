@@ -1,5 +1,6 @@
 import Classes.GameSetup;
 import Classes.Tile;
+import Classes.ColorManager;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,8 +9,9 @@ import javax.swing.*;
 
 public class VictoryPage {
 
-    public VictoryPage() {
-        
+    private ColorManager colorManager;
+    public VictoryPage(ColorManager colorManager) {
+        colorManager = colorManager;
     }
 
     Color darkBlue = new Color(0, 48, 73);
@@ -46,7 +48,7 @@ public class VictoryPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 victoryFrame.dispose(); 
-                StartPage startPage = new StartPage();
+                StartPage startPage = new StartPage(colorManager);
                 
             }
         });

@@ -1,6 +1,6 @@
+import Classes.ColorManager;
 import Classes.GameSetup;
 import Classes.Tile;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +14,10 @@ public class GameOverPage {
     Color orange = new Color(247, 127, 0);
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 45);
 
-    public GameOverPage() {
+    private ColorManager colorManager;
+
+    public GameOverPage(ColorManager colorManager) {
+        this.colorManager = colorManager;
         
     }
 
@@ -46,7 +49,7 @@ public class GameOverPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gameOverFrame.dispose(); 
-                StartPage startPage = new StartPage();
+                StartPage startPage = new StartPage(colorManager);
                 
             }
         });
