@@ -15,9 +15,9 @@ class StartPage {
         // this is for existing the program
         startPageWindowFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Color darkBlue = new Color(38, 70, 83); 
+        Color darkBlue = new Color(0, 48, 73); 
         Color aqua = new Color(42, 157, 143);
-        Color mustardYellow = new Color(233, 198, 74);
+        Color mustardYellow = new Color(234, 226, 183);
         // Create a JPanel to hold the buttons
         JPanel panel = new JPanel();
         panel.setOpaque(false); // makes it transparent to show the JFrame's color
@@ -55,8 +55,18 @@ class StartPage {
         // SETTINGS BUTTON
         JButton buttonSettings = new JButton("Settings");
         buttonSettings.setBounds(200, 200, 200, 40);
-        buttonSettings.setBackground(aqua);
+        buttonSettings.setBackground(mustardYellow);
         buttonSettings.setForeground(darkBlue);
+        buttonSettings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Hide the main frame
+                startPageWindowFrame.setVisible(false);
+                SettingsPage settingsPage = new SettingsPage();
+                settingsPage.settingsPage();
+            }
+        });
+
         
         // Add the buttons to the panel
         panel.add(buttonPlay);

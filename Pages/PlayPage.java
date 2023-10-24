@@ -1,3 +1,4 @@
+import Classes.ColorManager;
 import Classes.GameSetup;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,6 +25,8 @@ public class PlayPage extends JFrame {
         VictoryPage victoryPage = new VictoryPage();
         GameOverPage gameOverPage = new GameOverPage();
 
+        
+        
         // Setting up main frame:
         setTitle("PLAYING GAME");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,9 +58,11 @@ public class PlayPage extends JFrame {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-
+                // we need to figure out how to pass the mode here
+                ColorManager colorManager = new ColorManager(1);
                 buttons[i][j] = new JButton("" + gameSetup.getGrid()[i][j].getValue());
-                gameSetup.determineTileColor(gameSetup.getGrid(), i, j);
+                colorManager.determineColor(gameSetup.getTileInGrid(i, j));
+                System.out.println();
                 buttons[i][j].setBackground(gameSetup.getGrid()[i][j].getColor());
                 buttons[i][j].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
 
@@ -89,6 +94,13 @@ public class PlayPage extends JFrame {
                     gameOverPage.runGameOver();
                 }
                 scoreLabel.setText(scoreString + gameSetup.getScore());
+                
+                if (gameSetup.checkVictory()) {
+                    VictoryPage victoryPage = new VictoryPage();
+                    victoryPage.victoryPage();
+                    redrawGrid();
+                }
+
             }
         });
 
@@ -109,6 +121,12 @@ public class PlayPage extends JFrame {
                 }
 
                 scoreLabel.setText(scoreString + gameSetup.getScore());
+
+                if (gameSetup.checkVictory()) {
+                    VictoryPage victoryPage = new VictoryPage();
+                    victoryPage.victoryPage();
+                    redrawGrid();
+                }
             }
         });
 
@@ -129,6 +147,7 @@ public class PlayPage extends JFrame {
                 }
 
                 if (gameSetup.checkVictory()) {
+                    VictoryPage victoryPage = new VictoryPage();
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
@@ -153,6 +172,13 @@ public class PlayPage extends JFrame {
                     redrawGrid();
                 }
                 scoreLabel.setText(scoreString + gameSetup.getScore());
+                
+                if (gameSetup.checkVictory()) {
+                    VictoryPage victoryPage = new VictoryPage();
+                    victoryPage.victoryPage();
+                    redrawGrid();
+                }
+                
             }
         });
 
@@ -161,15 +187,17 @@ public class PlayPage extends JFrame {
     public void redrawGrid() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
+                // we need to figure out how to pass the mode here
+                ColorManager colorManager = new ColorManager(1);
                 buttons[i][j].setText("" + gameSetup.getGrid()[i][j].getValue());
                 buttons[i][j].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
                 if (gameSetup.getGrid()[i][j].getValue() != 0) {
-                    gameSetup.determineTileColor(gameSetup.getGrid(), i, j);
+                    colorManager.determineColor(gameSetup.getTileInGrid(i, j));
                     buttons[i][j].setBackground(gameSetup.getGrid()[i][j].getColor());
                 }
 
                 if (gameSetup.getGrid()[i][j].getValue() == 0) {
-                    gameSetup.determineTileColor(gameSetup.getGrid(), i, j);
+                    colorManager.determineColor(gameSetup.getTileInGrid(i, j));
                     buttons[i][j].setBackground(gameSetup.getGrid()[i][j].getColor());
                     buttons[i][j].setText("");
                 }
