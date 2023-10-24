@@ -15,11 +15,11 @@ public class GameSetup {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                grid[i][j] = new Tile(0);
+                grid[i][j] = new OrdinaryTile(0);
             }
         }
 
-        grid[2][1].setValue(2);
+        grid[2][1].setValue(64);
         grid[3][3].setValue(2);
 
     }
@@ -220,7 +220,18 @@ public class GameSetup {
         }
     }
 
-    public void bombATile(Tile superTile, Tile tileToBomb) {
+    public void bombATile(int rowSuper, int colSuper, int rowToBomb, int colToBomb) { 
+        // (Tile superTile, Tile tileToBomb) // maybe this is better
+        if (grid[rowSuper][colSuper] instanceof SuperTile) {
+            SuperTile superTile = (SuperTile) grid[rowSuper][colSuper];
+            
+            grid[rowToBomb][colToBomb].setValue(0);
+            superTile.decreaseTimesUsed();
+
+            if (superTile.getTimesUsed() == 0) {
+                grid[rowSuper][colSuper] = new OrdinaryTile(0);
+            }
+        }
 
     }
 

@@ -8,5 +8,13 @@ public class SuperTile extends Tile {
         timesUsed = 0;
         canBombTile = new OrdinaryTile(0); // change here later
     }
+
+    public int getTimesUsed() {
+        return timesUsed;
+    }
+    
+    public void decreaseTimesUsed() {
+        timesUsed = timesUsed - 1;
+    }
     
 }
