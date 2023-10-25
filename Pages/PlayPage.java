@@ -85,11 +85,11 @@ public class PlayPage  {
         playFrame.add(backButton);
         playFrame.add(panel);
         
+        // Creating buttons
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                // we need to figure out how to pass the mode here
-                
+
                 buttons[i][j] = new JButton("" + gameSetup.getGrid()[i][j].getValue());
                 colorManager.determineColor(gameSetup.getTileInGrid(i, j));
                 System.out.println();
@@ -102,31 +102,52 @@ public class PlayPage  {
                 buttons[i][j].setFont(moonspaced);
 
                 panel.add(buttons[i][j]);
+            }
+        }
 
+        
+        // Adding action listeners and bombing features
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++){
                 buttons[i][j].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         sidePanel.setVisible(true); // Show the side panel when a button is clicked
 
-                          
+                        
+                        
+                        // Adding borders to the tiles that can be bombed
+
+                        for (int m = 0; m < 4; m++) {
+                            for (int n = 0; n < 4; n++) {
+                                if(gameSetup.getGrid()[m][n].getValue() == 2) {
+                                buttons[m][n].setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
+                                }
+                            }
+                        }
+
+                        // Close button 
                         closeButton.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 sidePanel.setVisible(false);
-                                playFrame.remove(closeButton);  
+                                playFrame.remove(closeButton); 
+
+                                for (int m = 0; m < 4; m++) {
+                                    for (int n = 0; n < 4; n++) {
+                                        if(gameSetup.getGrid()[m][n].getValue() == 2) {
+                                            buttons[m][n].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
+                                }
+                            }
+                        }
+
                             }
                         });
+
                     }
                 });
-
-                playFrame.revalidate();
-                playFrame.repaint();
             }
         }
-
-        
-
-        
 
         
 
