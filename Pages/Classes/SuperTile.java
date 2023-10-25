@@ -14,7 +14,7 @@ public class SuperTile extends Tile {
     }
     
     public void decreaseTimesUsed() {
-        timesUsed = timesUsed - 1;
+        timesUsed = timesUsed + 1;
     }
 
     public void setValue(int newValue) {
@@ -22,11 +22,6 @@ public class SuperTile extends Tile {
         canBombTileValue = calculateWhatTileSuperCanBomb(); 
     }
 
-    // 1024: 2
-    //512: 4
-    //256: 8
-    //128: 16
-    //64: 32
     public int calculateWhatTileSuperCanBomb() { // !!! find a better name 
         switch (super.getValue()) {
             case 64: return 32;
@@ -36,6 +31,13 @@ public class SuperTile extends Tile {
             case 1024: return 2;
             default: return 0;
         }
+    }
 
+    public boolean checkIfCanBomb(int value) {
+        if (canBombTileValue == value) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

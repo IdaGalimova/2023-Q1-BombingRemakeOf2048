@@ -12,21 +12,17 @@ public class TileManager {
             }
         }
 
-        // grid[2][1].setValue(64);
-        // grid[3][3].setValue(2);
-        setValue(2, 3, 64);
-        setValue(3, 3, 64);
-        setValue(1, 3, 128);
-        setValue(1, 3, 128);
+        setValue(2, 0, 32);
+        setValue(2, 1, 32);
+
+        setValue(3, 3, 32);
+        setValue(1, 3, 32);
+        setValue(0, 3, 32);
 
     }
 
     public Tile[][] getGrid() {
         return grid;
-    }
-
-    public void setGrid(Tile[][] grid) {
-        this.grid = grid;
     }
 
     public void setValue(int row, int col, int newValue) {
@@ -39,5 +35,20 @@ public class TileManager {
 
     public void setValueZero(int row, int col) {
         grid[row][col] = new OrdinaryTile(0);
-    } 
+    }
+
+    public void bombTile(int rowSuper, int colSuper, int rowToBomb, int colToBomb) {
+        if (grid[rowSuper][colSuper] instanceof SuperTile) {
+            SuperTile superTile = (SuperTile) grid[rowSuper][colSuper];
+            
+            if (superTile.checkIfCanBomb(grid[rowToBomb][colToBomb].getValue())) {
+                superTile.decreaseTimesUsed();
+                setValueZero(rowToBomb, colToBomb);
+    
+                if (superTile.getTimesUsed() == 3) {
+                    setValueZero(rowSuper, colSuper);
+                }
+            }
+        }
+    }
 }

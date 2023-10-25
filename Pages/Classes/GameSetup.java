@@ -4,13 +4,11 @@ import java.util.Random;
 import java.awt.Color;
 
 public class GameSetup {
-    private ColorManager colorManager; // not sure if we need this
     private TileManager tileManager;
     private int score;
 
     public GameSetup() {
         tileManager = new TileManager();
-        colorManager = new ColorManager(1); // CHANGE MODE HERE LATER
         score = 0;
     }
 
@@ -33,8 +31,12 @@ public class GameSetup {
             String rowLine = endHorizontal + " ";
             for (int j = 0; j < 4; j++) {
                 rowLine += grid[i][j].getValue();
+                // For testing if bombing is working:
                 if (grid[i][j] instanceof SuperTile) {
-                    rowLine += "(!)";
+                    SuperTile superTile = (SuperTile) grid[i][j];
+                    rowLine += "(!";
+                    rowLine += superTile.getTimesUsed();
+                    rowLine += ")";
                 }
                 rowLine += " ";
             }
@@ -75,12 +77,10 @@ public class GameSetup {
 
             for (int row = 0; row < 4; row++) {
                 if (grid[row][col].hasValue()) {
-                    // grid[0 + count][col].setValue(grid[row][col].getValue());
                     tileManager.setValue(0 + count, col, grid[row][col].getValue());
 
                     // Setting original tile as empty after the tile is moved
                     if (count != row) {
-                        // grid[row][col].setValue(0);
                         tileManager.setValueZero(row, col);
                     }
                     count++;
@@ -88,7 +88,6 @@ public class GameSetup {
             }
         }
 
-        // tileManager.setGrid(grid);
     }
 
     public void moveTilesDown() {
@@ -99,12 +98,10 @@ public class GameSetup {
 
             for (int row = 3; row >= 0; row--) {
                 if (grid[row][col].hasValue()) {
-                    // grid[count][col].setValue(grid[row][col].getValue());
                     tileManager.setValue(count, col, grid[row][col].getValue());
 
                     // Setting original tile as empty after the tile is moved
                     if (count != row) {
-                        // grid[row][col].setValue(0);
                         tileManager.setValueZero(row, col);
                     }
                     count--;
@@ -112,7 +109,6 @@ public class GameSetup {
             }
         }
 
-        // tileManager.setGrid(grid);
     }
 
     public void moveTilesRight() {
@@ -122,19 +118,15 @@ public class GameSetup {
             int count = 3;
             for (int col = 3; col >= 0; col--) {
                 if (grid[row][col].hasValue()) {
-                    // grid[row][count].setValue(grid[row][col].getValue());
                     tileManager.setValue(row, count, grid[row][col].getValue());
                     // Setting original tile as empty after the tile is moved
                     if (count != col) {
-                        // grid[row][col].setValue(0);
                         tileManager.setValueZero(row, col);
                     }
                     count--;
                 }
             }
         }
-
-        // tileManager.setGrid(grid);
     }
 
     public void moveTilesLeft() {
@@ -144,25 +136,16 @@ public class GameSetup {
             int count = 0;
             for (int col = 0; col < 4; col++) {
                 if (grid[row][col].hasValue()) {
-                    // grid[row][count].setValue(grid[row][col].getValue());
                     tileManager.setValue(row, count, grid[row][col].getValue());
 
                     // Setting original tile as empty after the tile is moved
                     if (count != col) {
-                        // grid[row][col].setValue(0);
                         tileManager.setValueZero(row, col);
                     }
                     count++;
                 }
             }
         }
-
-        // tileManager.setGrid(grid);
-    }
-
-    public void combineTiles() { // probably dont need this one as we are using separate
-                                 // methods for combining tiles
-
     }
 
     public void combineTilesUp() {
@@ -177,17 +160,13 @@ public class GameSetup {
                 if (grid[row][col].hasValue()) {
                     if (grid[row][col].getValue() == nextTileValue) {
                         score += 2 * grid[row][col].getValue();
-                        // grid[row][col].setValue(grid[row][col].getValue() * 2);
                         tileManager.setValue(row, col, grid[row][col].getValue() * 2);
 
-                        // grid[row + 1][col].setValue(0);
                         tileManager.setValueZero(row + 1, col);
                     }
                 }
             }
         }
-
-        // tileManager.setGrid(grid);
     }
 
     public void combineTilesDown() {
@@ -202,17 +181,13 @@ public class GameSetup {
                 if (grid[row][col].hasValue()) {
                     if (grid[row][col].getValue() == nextTileValue) {
                         score += 2 * grid[row][col].getValue();
-                        // grid[row][col].setValue(grid[row][col].getValue() * 2);
                         tileManager.setValue(row, col, grid[row][col].getValue() * 2);
 
-                        // grid[row - 1][col].setValue(0);
                         tileManager.setValueZero(row - 1, col);
                     }
                 }
             }
         }
-
-        // tileManager.setGrid(grid);
     }
 
     public void combineTilesRight() {
@@ -228,17 +203,13 @@ public class GameSetup {
 
                     if (grid[row][col].getValue() == nextTileValue) {
                         score += 2 * grid[row][col].getValue();
-                        // grid[row][col].setValue(grid[row][col].getValue() * 2);
                         tileManager.setValue(row, col, grid[row][col].getValue() * 2);
 
-                        // grid[row][col - 1].setValue(0);
                         tileManager.setValueZero(row, col - 1);
                     }
                 }
             }
         }
-
-        // tileManager.setGrid(grid);
     }
 
     public void combineTilesLeft() {
@@ -254,35 +225,17 @@ public class GameSetup {
 
                     if (grid[row][col].getValue() == nextTileValue) {
                         score += 2 * grid[row][col].getValue();
-                        // grid[row][col].setValue(grid[row][col].getValue() * 2);
                         tileManager.setValue(row, col, grid[row][col].getValue() * 2);
 
-                        // grid[row][col + 1].setValue(0);
                         tileManager.setValueZero(row, col + 1);
                     }
                 }
             }
         }
-
-        // tileManager.setGrid(grid);
     }
 
     public void bombATile(int rowSuper, int colSuper, int rowToBomb, int colToBomb) { 
-        // (Tile superTile, Tile tileToBomb) // maybe this is better
-        Tile[][] grid = tileManager.getGrid();
-
-        if (grid[rowSuper][colSuper] instanceof SuperTile) {
-            SuperTile superTile = (SuperTile) grid[rowSuper][colSuper];
-            
-            grid[rowToBomb][colToBomb].setValue(0);
-            superTile.decreaseTimesUsed();
-
-            if (superTile.getTimesUsed() == 0) {
-                grid[rowSuper][colSuper] = new OrdinaryTile(0);
-            }
-        }
-
-        tileManager.setGrid(grid);
+        tileManager.bombTile(rowSuper, colSuper, rowToBomb, colToBomb);
 
     }
 
@@ -391,13 +344,6 @@ public class GameSetup {
         return checkVictory;
     }
 
-    // public Tile getTileInGrid(int row, int col) {
-    //     Tile[][] grid = tileManager.getGrid();
-        
-    //     Tile tile = grid[row][col];
-    //     return tile; 
-    // }
-
     // Method to check if there are any empty tiles left
     public boolean checkIfFullGrid() {
         Tile[][] grid = tileManager.getGrid();
@@ -470,33 +416,26 @@ public class GameSetup {
 
             if (grid[randomRow][randomCol].getValue() == 0) {
                 int randomValue = generateNumber();
-                grid[randomRow][randomCol].setValue(randomValue);
-                // score += randomValue;
+                tileManager.setValue(randomRow, randomCol, randomValue);
             } else if (grid[randomRow][randomCol].getValue() != 0) {
                 fillTileWithRandomNumber();
             }
 
         }
 
-        tileManager.setGrid(grid);
-
         return grid;
     }
 
     public void resetGame() {
-        Tile[][] grid = tileManager.getGrid();
-        
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                grid[i][j].setValue(0);
+                tileManager.setValueZero(i, j);
             }
         }
         score = 0;
 
         fillTileWithRandomNumber();
         fillTileWithRandomNumber();
-
-        tileManager.setGrid(grid);
     }
 
 }
