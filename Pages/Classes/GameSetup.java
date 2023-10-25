@@ -11,7 +11,7 @@ public class GameSetup {
     public GameSetup() {
         grid = new Tile[4][4];
         score = 0;
-        colorManager = new ColorManager(0); // CHANGE MODE HERE LATER
+        colorManager = new ColorManager(1); // CHANGE MODE HERE LATER
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -333,6 +333,11 @@ public class GameSetup {
         return grid;
     }
 
+    public Tile getTileInGrid(int row, int col) {
+        Tile tile = getGrid() [row] [col];
+        return tile; 
+    }
+
     // Method to check if there are any empty tiles left
     public boolean checkIfFullGrid() {
         boolean isFull = true;
@@ -407,30 +412,6 @@ public class GameSetup {
                 fillTileWithRandomNumber();
             }
 
-        }
-
-        return grid;
-    }
-
-    public Tile[][] determineTileColor(Tile[][] grid, int row, int col) {
-        if (grid[row][col].getValue() == 0) {
-            grid[row][col].setColor(234, 226, 183);
-        }
-
-        if (grid[row][col].getValue() == 2) {
-            grid[row][col].setColor(252, 191, 73);
-        }
-
-        if (grid[row][col].getValue() == 4) {
-            grid[row][col].setColor(247, 127, 0);
-        }
-
-        if (grid[row][col].getValue() == 8) {
-            grid[row][col].setColor(214, 40, 40);
-        }
-
-        if (grid[row][col].getValue() > 8) {
-            grid[row][col].setColor(139, 0, 0);
         }
 
         return grid;

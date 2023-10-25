@@ -23,8 +23,8 @@ public class Tile {
         return this.color;
     }
 
-    public void setColor(int cR, int cG, int cB) {
-        this.color = new Color(cR, cG, cB);
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public boolean hasValue() {
