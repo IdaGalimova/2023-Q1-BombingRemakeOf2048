@@ -33,6 +33,13 @@ public class PlayPage {
 
     ColorManager colorManager;
 
+
+    JPanel sidePanel = new JPanel();
+    JButton closeButton = new JButton("Close");
+    JPanel panel = new JPanel(new GridLayout(4, 4));
+    JLabel bombingsLeftText = new JLabel("Bombings left:");
+        
+
     public PlayPage(ColorManager colorManager) {
         this.colorManager = colorManager;
     }
@@ -76,22 +83,21 @@ public class PlayPage {
         });
 
         // Setting up panel to show the SuperTile abilities
-
-        JPanel sidePanel = new JPanel();
         sidePanel.setBounds(520, 100, 200, 400);
         sidePanel.setBackground(darkBluelighter);
         sidePanel.setVisible(false);
         playFrame.add(sidePanel);
+        
 
         // Setting up the close button for the side panel
 
-        JButton closeButton = new JButton("Close");
+        
         sidePanel.add(closeButton);
         closeButton.setBounds(10, 10, 40, 20);
 
         // Setting up the panel for the buttons
 
-        JPanel panel = new JPanel(new GridLayout(4, 4));
+       
         panel.setBounds(100, 100, 400, 400);
 
         playFrame.add(backButton);
@@ -138,7 +144,7 @@ public class PlayPage {
                             valueOftile.setFont(sidePanelTextFont);
                             sidePanel.add(valueOftile);
 
-                            JLabel bombingsLeftText = new JLabel("Bombings left:");
+                            
                             // bombingsLeftText.setBounds(570, 300, 70, 50);
                             bombingsLeftText.setFont(sidePanelTextFont);
                             sidePanel.add(bombingsLeftText);
@@ -169,41 +175,17 @@ public class PlayPage {
                                 }
                             }
 
-
-
-                           /*   for (int m = 0; m < 4; m++) {
-                                for (int n = 0; n < 4; n++) {
-                                    int pressedM = m;
-                                    int pressedN = n;
-                                    wasBombed = false;
-                                    
-                                    
-                                    buttons[m][n].addActionListener(new ActionListener() {
-                                        @Override
-                                        public void actionPerformed(ActionEvent e) {
-                                            gameSetup.bombATile(pressedButtonI, pressedButtonJ, pressedM, pressedN);
-                                            redrawGrid();
-                                            for (int x = 0; x < 4; x++) {
-                                                for (int y = 0; y < 4; y++) {
-                                                    buttons[x][y].removeActionListener(this);
-                                                }
-                                            }
-                                            wasBombed = true;
-                                        }
-                                    });
-                                    if (wasBombed) {
-                                        break;
-                                    }
-                                }
-                                if(wasBombed){
-                                    break;
-                                }
-                            }*/
-
                             addBombableListener(pressedButtonI, pressedButtonJ);
-                            //removeBombableListeners();
+                            playFrame.revalidate();
+                            playFrame.repaint();
+                            sidePanel.revalidate();
+                            sidePanel.repaint();
 
-                            // Close button
+
+                            
+
+                            // Close button 
+                          
                             closeButton.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
@@ -211,7 +193,6 @@ public class PlayPage {
                                     sidePanel.remove(bombingsLeftText);
                                     sidePanel.remove(bombingsLeft);
                                     sidePanel.setVisible(false);
-                                    playFrame.remove(closeButton);
 
                                     // Unchanging the borders
                                     
@@ -220,8 +201,7 @@ public class PlayPage {
                                         for (int n = 0; n < 4; n++) {
                                             buttons[m][n].setEnabled(true);
 
-                                            if (gameSetup.getGrid()[m][n].
-                                                getValue() == superTile.calculateWhatTileSuperCanBomb()) {
+                                            if (gameSetup.getGrid()[m][n].getValue() == superTile.calculateWhatTileSuperCanBomb()) {
                                                 buttons[m][n].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
                                             }
                                         }
@@ -275,6 +255,7 @@ public class PlayPage {
                 System.out.println("right key pressed");
 
                 gameSetup.moveTiles("right");
+                wasBombed = false;
                 redrawGrid();
 
                 if (gameSetup.checkGameOver()) {
@@ -354,17 +335,22 @@ public class PlayPage {
                 int pressedM = m;
                 int pressedN = n;
                 if (gameSetup.getGrid()[m][n].getValue() == superTile.calculateWhatTileSuperCanBomb()) {
-                    //gameSetup.printGrid();
-                    buttons[pressedM][pressedN].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                     ActionListener listener = new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            
                             gameSetup.bombATile(pressedButtonI, pressedButtonJ, pressedM, pressedN);
                             removeBombableListeners();
                             redrawGrid();
-                            wasBombed = true;
-                            //removeBombableListeners();
+                            sidePanel.setVisible(false);
+                            for (int m = 0; m < 4; m++) {
+                                        for (int n = 0; n < 4; n++) {
+                                            buttons[m][n].setEnabled(true);
+
+                                            if (gameSetup.getGrid()[m][n].getValue() == superTile.calculateWhatTileSuperCanBomb()) {
+                                                buttons[m][n].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
+                                            }
+                                        }
+                                    }
                         }
                     };
                     buttons[m][n].addActionListener(listener);
