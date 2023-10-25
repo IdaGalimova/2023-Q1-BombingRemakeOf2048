@@ -19,6 +19,10 @@ public class Tile {
         this.value = newValue;
     }
 
+    // protected void convertToSuperTile() { // not sure about this yet
+    //     SuperTile convertedTile = new SuperTile(this.getValue());
+    // }
+
     public Color getColor() {
         return this.color;
     }

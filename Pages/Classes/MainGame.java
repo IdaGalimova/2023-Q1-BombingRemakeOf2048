@@ -13,11 +13,20 @@ public class MainGame {
         System.out.println();
         gameSetup.printGrid();
 
-        // gameSetup.moveTiles("up");
-        // gameSetup.printGrid();
-
-        gameSetup.bombATile(2, 1, 3, 3);
+        gameSetup.moveTiles("down");
         gameSetup.printGrid();
+
+        gameSetup.moveTiles("up");
+        gameSetup.printGrid();
+
+        gameSetup.moveTiles("right");
+        gameSetup.printGrid();
+
+        gameSetup.moveTiles("left");
+        gameSetup.printGrid();
+
+        // gameSetup.bombATile(2, 1, 3, 3);
+        // gameSetup.printGrid();
 
     }
 

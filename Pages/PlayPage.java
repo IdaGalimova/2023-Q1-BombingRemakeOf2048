@@ -91,7 +91,7 @@ public class PlayPage  {
                 // we need to figure out how to pass the mode here
                 
                 buttons[i][j] = new JButton("" + gameSetup.getGrid()[i][j].getValue());
-                colorManager.determineColor(gameSetup.getTileInGrid(i, j));
+                colorManager.determineColor(gameSetup.getGrid()[i][j]);
                 System.out.println();
                 buttons[i][j].setBackground(gameSetup.getGrid()[i][j].getColor());
                 buttons[i][j].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
@@ -243,12 +243,12 @@ public class PlayPage  {
                 buttons[i][j].setText("" + gameSetup.getGrid()[i][j].getValue());
                 buttons[i][j].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
                 if (gameSetup.getGrid()[i][j].getValue() != 0) {
-                    colorManager.determineColor(gameSetup.getTileInGrid(i, j));
+                    colorManager.determineColor(gameSetup.getGrid()[i][j]);
                     buttons[i][j].setBackground(gameSetup.getGrid()[i][j].getColor());
                 }
 
                 if (gameSetup.getGrid()[i][j].getValue() == 0) {
-                    colorManager.determineColor(gameSetup.getTileInGrid(i, j));
+                    colorManager.determineColor(gameSetup.getGrid()[i][j]);
                     buttons[i][j].setBackground(gameSetup.getGrid()[i][j].getColor());
                     buttons[i][j].setText("");
                 }
