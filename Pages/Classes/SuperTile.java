@@ -1,20 +1,24 @@
 package Classes;
 public class SuperTile extends Tile {
-    private int timesUsed;
+    private int bombingsLeft;
     private int canBombTileValue;
 
     public SuperTile(int value) {
         super(value); // not sure about this
-        timesUsed = 0;
+        bombingsLeft = 3;
         canBombTileValue = calculateWhatTileSuperCanBomb(); 
     }
 
-    public int getTimesUsed() {
-        return timesUsed;
+    public int getCanBombTile() {
+        return canBombTileValue;
+    }
+    
+    public int getBombingsLeft() {
+        return bombingsLeft;
     }
     
     public void decreaseTimesUsed() {
-        timesUsed = timesUsed + 1;
+        bombingsLeft = bombingsLeft - 1;
     }
 
     public void setValue(int newValue) {

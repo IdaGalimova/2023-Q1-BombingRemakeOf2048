@@ -2,6 +2,7 @@ package Classes;
 
 public class TileManager {
     private Tile[][] grid;
+    private Tile lastBombedTile = new OrdinaryTile(0);
 
     public TileManager() {
         grid = new Tile[4][4];
@@ -19,6 +20,10 @@ public class TileManager {
         setValue(1, 3, 32);
         setValue(0, 3, 32);
 
+    }
+
+    public Tile getLastBombedTile() {
+        return lastBombedTile;
     }
 
     public Tile[][] getGrid() {
@@ -43,9 +48,10 @@ public class TileManager {
             
             if (superTile.checkIfCanBomb(grid[rowToBomb][colToBomb].getValue())) {
                 superTile.decreaseTimesUsed();
+                lastBombedTile = grid[rowToBomb][colToBomb];
                 setValueZero(rowToBomb, colToBomb);
     
-                if (superTile.getTimesUsed() == 3) {
+                if (superTile.getBombingsLeft() == 0) {
                     setValueZero(rowSuper, colSuper);
                 }
             }

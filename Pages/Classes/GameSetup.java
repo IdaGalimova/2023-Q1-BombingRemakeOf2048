@@ -35,7 +35,7 @@ public class GameSetup {
                 if (grid[i][j] instanceof SuperTile) {
                     SuperTile superTile = (SuperTile) grid[i][j];
                     rowLine += "(!";
-                    rowLine += superTile.getTimesUsed();
+                    rowLine += superTile.getBombingsLeft();
                     rowLine += ")";
                 }
                 rowLine += " ";
