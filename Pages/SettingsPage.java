@@ -46,18 +46,7 @@ public class SettingsPage {
 
 
 
-        JButton backButton = new JButton("Go Back");
-        backButton.setBounds(0, 0, 100, 20);
-        backButton.setBackground(sandy);
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                settingsFrame.setVisible(false);
-                settingsFrame.dispose();
-                StartPage startPage = new StartPage(colorManager);
-            }
-        });
-        settingsFrame.add(backButton);
+        
 
 
         JButton lightModeButton = new JButton("Light mode");
@@ -99,6 +88,19 @@ public class SettingsPage {
                         }
             }
         });
+
+        JButton backButton = new JButton("Go Back");
+        backButton.setBounds(0, 0, 100, 20);
+        backButton.setBackground(sandy);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                settingsFrame.setVisible(false);
+                settingsFrame.dispose();
+                StartPage startPage = new StartPage(colorManager);
+            }
+        });
+        settingsFrame.add(backButton);
         
 
         settingsFrame.add(darkModeButton);
