@@ -24,7 +24,7 @@ public class PlayPage {
     Color orange = new Color(247, 127, 0);
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 30);
     Font sidePanelTextFont = new Font("Monospaced", Font.ITALIC | Font.BOLD, 20);
-    Font scroreFont = new Font("Monospaced", Font.ITALIC | Font.BOLD, 15);
+    Font scroreFont = new Font("Monospaced", Font.ITALIC | Font.BOLD, 25);
 
     JButton[][] buttons;
     JLabel scoreLabel = new JLabel();
@@ -38,6 +38,8 @@ public class PlayPage {
     JButton closeButton = new JButton("Close");
     JPanel panel = new JPanel(new GridLayout(4, 4));
     JLabel bombingsLeftText = new JLabel("Bombings left:");
+    JLabel valueOftile = new JLabel();
+    JLabel bombingsLeft = new JLabel();
         
 
     public PlayPage(ColorManager colorManager) {
@@ -137,21 +139,20 @@ public class PlayPage {
                             SuperTile superTile = (SuperTile) gameSetup.getGrid()
                                 [pressedButtonI][pressedButtonJ];
 
-                            JLabel valueOftile = new JLabel(
-                                    superTile.getValue() + ": " + superTile.getCanBombTile());
+                            valueOftile.setText(superTile.getValue() + ": " + superTile.getCanBombTile());
 
                             // valueOftile.setBounds(570, 250, 70, 50);
                             valueOftile.setFont(sidePanelTextFont);
+                            valueOftile.setForeground(Color.WHITE);
                             sidePanel.add(valueOftile);
 
-                            
-                            // bombingsLeftText.setBounds(570, 300, 70, 50);
                             bombingsLeftText.setFont(sidePanelTextFont);
+                            bombingsLeftText.setForeground(Color.WHITE);
                             sidePanel.add(bombingsLeftText);
 
-                            JLabel bombingsLeft = new JLabel(superTile.getBombingsLeft() + "");
-                            // bombingsLeft.setBounds(570, 350, 70, 50);
+                            bombingsLeft.setText(superTile.getBombingsLeft() + "");
                             bombingsLeft.setFont(sidePanelTextFont);
+                            bombingsLeft.setForeground(Color.WHITE);
                             sidePanel.add(bombingsLeft);
 
                             sidePanel.setVisible(true); // Show the side panel when a button is clicked
@@ -204,6 +205,8 @@ public class PlayPage {
                                             if (gameSetup.getGrid()[m][n].getValue() == superTile.calculateWhatTileSuperCanBomb()) {
                                                 buttons[m][n].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
                                             }
+
+                                            removeBombableListeners();
                                         }
                                     }
 
@@ -340,11 +343,15 @@ public class PlayPage {
                         public void actionPerformed(ActionEvent e) {
                             gameSetup.bombATile(pressedButtonI, pressedButtonJ, pressedM, pressedN);
                             removeBombableListeners();
+                            sidePanel.remove(valueOftile);
+                            sidePanel.remove(bombingsLeft);
+                            sidePanel.remove(bombingsLeftText);
                             redrawGrid();
+                            //sidePanel.remove();
                             sidePanel.setVisible(false);
                             for (int m = 0; m < 4; m++) {
-                                        for (int n = 0; n < 4; n++) {
-                                            buttons[m][n].setEnabled(true);
+                                    for (int n = 0; n < 4; n++) {
+                                        buttons[m][n].setEnabled(true);
 
                                             if (gameSetup.getGrid()[m][n].getValue() == superTile.calculateWhatTileSuperCanBomb()) {
                                                 buttons[m][n].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
