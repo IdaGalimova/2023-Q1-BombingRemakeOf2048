@@ -19,14 +19,17 @@ public class MainGame {
         gameSetup.moveTiles("right");
         gameSetup.printGrid();
 
-
+        
         gameSetup.bombATile(2, 3, 3, 3);
         gameSetup.printGrid();
 
-        gameSetup.bombATile(2, 3, 1, 3);
+        gameSetup.moveTiles("left");
         gameSetup.printGrid();
 
-        gameSetup.bombATile(2, 3, 0, 3);
+        gameSetup.bombATile(2, 0, 1, 0);
+        gameSetup.printGrid();
+
+        gameSetup.bombATile(2, 0, 0, 0);
         gameSetup.printGrid();
 
     }

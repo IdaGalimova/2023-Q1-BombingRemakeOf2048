@@ -13,12 +13,29 @@ public class TileManager {
             }
         }
 
-        setValue(2, 0, 32);
-        setValue(2, 1, 32);
+        setValue(0, 0, 2);
+        setValue(0, 1, 4);
+        setValue(0, 2, 8);
+        setValue(0, 3, 16);
 
-        setValue(3, 3, 32);
-        setValue(1, 3, 32);
-        setValue(0, 3, 32);
+        setValue(1, 0, 32);
+        setValue(1, 1, 64);
+        setValue(1, 2, 128);
+        setValue(1, 3, 256);
+        
+        setValue(2, 0, 512);
+        setValue(2, 1, 1024);
+        setValue(2, 2, 2048);
+        // setValue(2, 3, 8);
+
+        // setValue(0, 0, 2);
+        // setValue(0, 1, 4);
+        // setValue(0, 2, 8);
+        // setValue(0, 3, 8);
+
+        // setValue(3, 3, 32);
+        // setValue(1, 3, 32);
+        // setValue(0, 3, 32);
 
     }
 
@@ -32,7 +49,7 @@ public class TileManager {
 
     public void setValue(int row, int col, int newValue) {
         if (newValue >= 64 && grid[row][col] instanceof OrdinaryTile) {
-            grid[row][col] = new SuperTile(newValue);
+            grid[row][col] = new SuperTile(newValue); // the problem is here
             return;
         }
         grid[row][col].setValue(newValue);

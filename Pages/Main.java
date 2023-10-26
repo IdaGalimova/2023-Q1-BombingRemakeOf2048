@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 public class Main {
     
     public static void main(String[] args) {
-        ColorManager colorManager = new ColorManager();
+        ColorManager colorManager = new ColorManager(1);
         StartPage startPage = new StartPage(colorManager);
         
     }

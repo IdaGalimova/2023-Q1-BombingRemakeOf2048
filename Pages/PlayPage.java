@@ -113,6 +113,7 @@ public class PlayPage {
                 System.out.println();
                 buttons[i][j].setBackground(gameSetup.getGrid()[i][j].getColor());
                 buttons[i][j].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
+                buttons[i][j].setForeground(colorManager.getTextColor());
 
                 if (gameSetup.getGrid()[i][j].getValue() == 0) {
                     buttons[i][j].setText("");
