@@ -13,7 +13,6 @@ import javax.swing.*;
 
 public class PlayPage {
 
-    private boolean wasBombed = false;
     GameSetup gameSetup = new GameSetup();
 
     Color darkBlue = new Color(0, 48, 73);
@@ -40,6 +39,7 @@ public class PlayPage {
     JLabel bombingsLeftText = new JLabel("Bombings left:");
     JLabel valueOftile = new JLabel();
     JLabel bombingsLeft = new JLabel();
+    JFrame playFrame = new JFrame();
         
 
     public PlayPage(ColorManager colorManager) {
@@ -52,11 +52,11 @@ public class PlayPage {
 
     
 
-        VictoryPage victoryPage = new VictoryPage(colorManager);
+        VictoryPage victoryPage = new VictoryPage(colorManager, playFrame);
         GameOverPage gameOverPage = new GameOverPage(colorManager);
 
         // Setting up main frame:
-        JFrame playFrame = new JFrame();
+        
         playFrame.setTitle("PLAYING GAME");
         playFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         playFrame.setSize(800, 600);
@@ -242,7 +242,7 @@ public class PlayPage {
                 scoreLabel.setText(scoreString + gameSetup.getScore());
 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage(colorManager);
+                    VictoryPage victoryPage = new VictoryPage(colorManager, playFrame);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
@@ -259,7 +259,6 @@ public class PlayPage {
                 System.out.println("right key pressed");
 
                 gameSetup.moveTiles("right");
-                wasBombed = false;
                 redrawGrid();
 
                 if (gameSetup.checkGameOver()) {
@@ -270,7 +269,7 @@ public class PlayPage {
                 scoreLabel.setText(scoreString + gameSetup.getScore());
 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage(colorManager);
+                    VictoryPage victoryPage = new VictoryPage(colorManager, playFrame);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
@@ -295,7 +294,7 @@ public class PlayPage {
                 }
 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage(colorManager);
+                    VictoryPage victoryPage = new VictoryPage(colorManager, playFrame);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
@@ -322,7 +321,7 @@ public class PlayPage {
                 scoreLabel.setText(scoreString + gameSetup.getScore());
 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage(colorManager);
+                    VictoryPage victoryPage = new VictoryPage(colorManager, playFrame);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }

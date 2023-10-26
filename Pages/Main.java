@@ -9,9 +9,14 @@ import javax.swing.JPanel;
 
 public class Main {
     
-    public static void main(String[] args) {
+
+    public void main() {
         ColorManager colorManager = new ColorManager(1);
         StartPage startPage = new StartPage(colorManager);
+    }
+    public static void main(String[] args) {
         
+        Main main = new Main();
+        main.main();
     }
 }

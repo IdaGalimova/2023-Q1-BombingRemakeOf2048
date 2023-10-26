@@ -10,8 +10,9 @@ import javax.swing.*;
 public class VictoryPage {
 
     private ColorManager colorManager;
-    public VictoryPage(ColorManager colorManager) {
+    public VictoryPage(ColorManager colorManager, JFrame playFrame) {
         colorManager = colorManager;
+        this.playFrameReference = playFrame;
     }
 
     Color darkBlue = new Color(0, 48, 73);
@@ -20,6 +21,7 @@ public class VictoryPage {
     Color red = new Color(214, 40, 40);
     Color orange = new Color(247, 127, 0);
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 45);
+    private JFrame playFrameReference;
 
     public void victoryPage() {
         // Setting up victory frame:
@@ -48,7 +50,9 @@ public class VictoryPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 victoryFrame.dispose(); 
-                StartPage startPage = new StartPage(colorManager);
+                Main main = new Main();
+                main.main();
+                playFrameReference.dispose();
                 
             }
         });
