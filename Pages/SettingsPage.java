@@ -8,10 +8,11 @@ import javax.swing.*;
 
 public class SettingsPage {
 
+    
     private float alpha = 1f;
-
+    
     class TransparentLabel extends JLabel {
-        private float alpha = 1f;  // Declare alpha inside TransparentLabel
+        private float alpha = 1f;  
     
         public TransparentLabel(String text) {
             super(text);
@@ -37,13 +38,15 @@ public class SettingsPage {
     Timer timer = new Timer(50, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            // as i understand alpha is opcity of an object, so with timer opacity decreases
+            //until its transparent
             alpha -= 0.05f;
             if (alpha <= 0f) {
-                messageLabel.setAlpha(0f);  // This will now correctly set the alpha value of the label
+                messageLabel.setAlpha(0f);  
                 timer.stop();
                 messageLabel.setText("");
             } else {
-                messageLabel.setAlpha(alpha);  // Adjust the alpha of the label here
+                messageLabel.setAlpha(alpha);  
             }
         }
     });

@@ -6,20 +6,29 @@ public class ColorManager {
 
     private int mode = 1;
     private Color textColor;
+    private Color backGroundColor;
 
     public ColorManager(int mode) {
         this.mode = mode;
         textColor = determineTextColor();
+        backGroundColor = determineBackgroundColor();
     }
 
     public void setMode(int mode) {
         this.mode = mode;
         textColor = determineTextColor();
+        backGroundColor = determineBackgroundColor();
     }
 
     public Color getTextColor() {
         return textColor;
     }
+    
+    public Color getBackgroundColor() {
+        return backGroundColor;
+    }
+
+
 
     public Color determineTextColor() {
         if (mode == 1) {
@@ -28,6 +37,17 @@ public class ColorManager {
             return new Color(235, 235, 235);
         }
         return null;
+    }
+
+    public Color determineBackgroundColor() {
+        if (mode == 2) {
+            return new Color(0, 48, 73);
+        } else if (mode == 1) {
+            return new Color(160, 176, 234);
+        } 
+        
+        return null;
+        
     }
 
     public void determineColor(Tile tile) {

@@ -15,6 +15,7 @@ public class PlayPage {
 
     GameSetup gameSetup = new GameSetup();
 
+    
     Color darkBlue = new Color(0, 48, 73);
     Color darkBluelighter = new Color(58, 94, 122);
     Color sandy = new Color(234, 226, 183);
@@ -50,7 +51,6 @@ public class PlayPage {
 
         buttons = new JButton[4][4];
 
-    
 
         VictoryPage victoryPage = new VictoryPage(colorManager, playFrame);
         GameOverPage gameOverPage = new GameOverPage(colorManager, playFrame);
@@ -61,7 +61,7 @@ public class PlayPage {
         playFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         playFrame.setSize(800, 600);
         playFrame.setLayout(null);
-        playFrame.getContentPane().setBackground(darkBlue);
+        playFrame.getContentPane().setBackground(colorManager.getBackgroundColor());
         playFrame.setVisible(true);
 
         // Setting up score:
@@ -86,6 +86,7 @@ public class PlayPage {
 
         // Setting up panel to show the SuperTile abilities
         sidePanel.setBounds(520, 100, 200, 400);
+        sidePanel.setBorder(BorderFactory.createLineBorder(darkBlue, 4));
         sidePanel.setBackground(darkBluelighter);
         sidePanel.setVisible(false);
         playFrame.add(sidePanel);
@@ -98,9 +99,8 @@ public class PlayPage {
         closeButton.setBounds(10, 10, 40, 20);
 
         // Setting up the panel for the buttons
-
-       
         panel.setBounds(100, 100, 400, 400);
+        panel.setBorder(BorderFactory.createLineBorder(darkBlue, 4));
 
         playFrame.add(backButton);
         playFrame.add(panel);
