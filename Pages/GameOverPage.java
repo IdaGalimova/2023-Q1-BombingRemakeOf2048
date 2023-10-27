@@ -15,9 +15,12 @@ public class GameOverPage {
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 45);
 
     private ColorManager colorManager;
+    private JFrame playFrameReference;
 
-    public GameOverPage(ColorManager colorManager) {
+
+    public GameOverPage(ColorManager colorManager, JFrame playFrame) {
         this.colorManager = colorManager;
+        this.playFrameReference = playFrame;
         
     }
 
@@ -27,7 +30,7 @@ public class GameOverPage {
         JFrame gameOverFrame = new JFrame();
         gameOverFrame.setTitle("GAME OVER");
         gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameOverFrame.setSize(600, 600);
+        gameOverFrame.setSize(800, 600);
         gameOverFrame.setLayout(new BorderLayout()); 
         gameOverFrame.getContentPane().setBackground(sandy);
     
@@ -49,7 +52,9 @@ public class GameOverPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gameOverFrame.dispose(); 
-                StartPage startPage = new StartPage(colorManager);
+                Main main = new Main();
+                main.main();
+                playFrameReference.dispose();
                 
             }
         });

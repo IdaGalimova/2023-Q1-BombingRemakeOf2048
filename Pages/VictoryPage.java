@@ -28,7 +28,7 @@ public class VictoryPage {
         JFrame victoryFrame = new JFrame();
         victoryFrame.setTitle("VICTORY");
         victoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        victoryFrame.setSize(600, 600);
+        victoryFrame.setSize(800, 600);
         victoryFrame.setLayout(new BorderLayout()); 
         victoryFrame.getContentPane().setBackground(sandy);
     

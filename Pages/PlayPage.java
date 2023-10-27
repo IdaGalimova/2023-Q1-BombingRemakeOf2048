@@ -53,7 +53,7 @@ public class PlayPage {
     
 
         VictoryPage victoryPage = new VictoryPage(colorManager, playFrame);
-        GameOverPage gameOverPage = new GameOverPage(colorManager);
+        GameOverPage gameOverPage = new GameOverPage(colorManager, playFrame);
 
         // Setting up main frame:
         
