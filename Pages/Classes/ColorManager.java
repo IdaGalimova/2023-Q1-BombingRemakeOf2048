@@ -44,10 +44,9 @@ public class ColorManager {
             return new Color(0, 48, 73);
         } else if (mode == 1) {
             return new Color(160, 176, 234);
-        } 
-        
-        return null;
-        
+        } else {
+            return new Color(255, 255, 255);
+        }        
     }
 
     public void determineColor(Tile tile) {

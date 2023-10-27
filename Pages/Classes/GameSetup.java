@@ -398,7 +398,7 @@ public class GameSetup {
         }
 
         Random rand = new Random();
-        int randomInt = rand.nextInt(101);
+        int randomInt = rand.nextInt(100);
         randNumber = arrayOfValues[randomInt];
 
         return randNumber;
