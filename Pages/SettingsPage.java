@@ -7,14 +7,44 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class SettingsPage {
+
+    private float alpha = 1f;
+
+    class TransparentLabel extends JLabel {
+        private float alpha = 1f;  // Declare alpha inside TransparentLabel
+    
+        public TransparentLabel(String text) {
+            super(text);
+        }
+    
+        public void setAlpha(float alpha) {
+            this.alpha = alpha;
+            repaint();
+        }
+    
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2d = (Graphics2D) g.create();
+            g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
+            super.paintComponent(g2d);
+            g2d.dispose();
+        }
+    }
     
     GameSetup gameSetup = new GameSetup();
     private ColorManager colorManager;
-    JLabel messageLabel;
-    Timer timer = new Timer(1000, new ActionListener() {
+    TransparentLabel messageLabel;
+    Timer timer = new Timer(50, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            messageLabel.setText("");
+            alpha -= 0.05f;
+            if (alpha <= 0f) {
+                messageLabel.setAlpha(0f);  // This will now correctly set the alpha value of the label
+                timer.stop();
+                messageLabel.setText("");
+            } else {
+                messageLabel.setAlpha(alpha);  // Adjust the alpha of the label here
+            }
         }
     });
     
@@ -39,9 +69,9 @@ public class SettingsPage {
         settingsFrame.setVisible(true);
 
 
-        messageLabel = new JLabel();
+        messageLabel = new TransparentLabel(""); // Initialize with the custom TransparentLabel class
         messageLabel.setBounds(150, 200, 300, 30);
-        messageLabel.setForeground(sandy); 
+        messageLabel.setForeground(sandy);
         settingsFrame.add(messageLabel);
 
 
@@ -63,6 +93,8 @@ public class SettingsPage {
                         if (timer != null && timer.isRunning()) {
                             timer.stop();
                         }
+                        alpha = 1f;
+                        messageLabel.setAlpha(1f);
                         timer.start();
                         }
             }
@@ -84,6 +116,8 @@ public class SettingsPage {
                         if (timer != null && timer.isRunning()) {
                             timer.stop();
                         }
+                        alpha = 1f;
+                        messageLabel.setAlpha(1f);
                         timer.start();
                         }
             }

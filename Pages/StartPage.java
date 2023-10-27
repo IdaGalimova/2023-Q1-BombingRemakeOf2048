@@ -1,12 +1,14 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 import Classes.ColorManager;
 import Classes.GameSetup;
@@ -18,6 +20,7 @@ class StartPage {
     private ColorManager colorManager;
 
     public StartPage(ColorManager colorManager) {
+
         JFrame startPageWindowFrame = new JFrame("2048 MENU");
         
         this.colorManager = colorManager;
@@ -27,6 +30,10 @@ class StartPage {
         Color darkBlue = new Color(0, 48, 73); 
         Color aqua = new Color(42, 157, 143);
         Color mustardYellow = new Color(234, 226, 183);
+
+        UIManager.put("ToolTip.background", aqua);
+        UIManager.put("ToolTip.foreground", darkBlue);
+        UIManager.put("ToolTip.font", new Font("Moonspaced", Font.ITALIC, 12));
 
         startPageWindowFrame.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -40,6 +47,7 @@ class StartPage {
 
         // PLAY BUTTON
         JButton buttonPlay = new JButton("Play");
+        buttonPlay.setToolTipText("Start the game!");
         buttonPlay.setMaximumSize(new Dimension(200, 50));  
         buttonPlay.setPreferredSize(new Dimension(200, 50));
         buttonPlay.setBackground(mustardYellow);
@@ -57,18 +65,9 @@ class StartPage {
             }
         });
 
-
-        // RULES BUTTON
-        JButton buttonRules = new JButton("Rules");
-        buttonRules.setMaximumSize(new Dimension(200, 50));  
-        buttonRules.setPreferredSize(new Dimension(200, 50));
-        buttonRules.setBackground(aqua);
-        buttonRules.setForeground(darkBlue);
-        
-
-
         // SETTINGS BUTTON
         JButton buttonSettings = new JButton("Settings");
+        buttonSettings.setToolTipText("Adjust game settings.");
         buttonSettings.setMaximumSize(new Dimension(200, 50));  
         buttonSettings.setPreferredSize(new Dimension(200, 50));
         buttonSettings.setBackground(mustardYellow);
@@ -87,8 +86,6 @@ class StartPage {
         // Add the buttons to the panel
         startPageWindowFrame.add(panel, gbc);
         panel.add(buttonPlay);
-        panel.add(Box.createVerticalStrut(20));
-        panel.add(buttonRules);
         panel.add(Box.createVerticalStrut(20));
         panel.add(buttonSettings);
         
