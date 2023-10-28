@@ -1,18 +1,14 @@
 import Classes.ColorManager;
 import Classes.GameSetup;
 import Classes.SuperTile;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import javax.swing.*;
 
 public class PlayPage {
-
     private boolean wasBombed = false;
     GameSetup gameSetup = new GameSetup();
 
@@ -47,13 +43,7 @@ public class PlayPage {
     }
 
     public void playPage() {
-
         buttons = new JButton[4][4];
-
-    
-
-        VictoryPage victoryPage = new VictoryPage(colorManager);
-        GameOverPage gameOverPage = new GameOverPage(colorManager);
 
         // Setting up main frame:
         JFrame playFrame = new JFrame();
@@ -92,21 +82,21 @@ public class PlayPage {
         
 
         // Setting up the close button for the side panel
-
-        
         sidePanel.add(closeButton);
         closeButton.setBounds(10, 10, 40, 20);
 
         // Setting up the panel for the buttons
-
-       
         panel.setBounds(100, 100, 400, 400);
 
         playFrame.add(backButton);
         playFrame.add(panel);
 
-        // Creating buttons
 
+        // Setting up victory and game over pages:
+        VictoryPage victoryPage = new VictoryPage(colorManager);
+        GameOverPage gameOverPage = new GameOverPage(colorManager);
+
+        // Creating buttons
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
 
@@ -140,9 +130,9 @@ public class PlayPage {
                             SuperTile superTile = (SuperTile) gameSetup.getGrid()
                                 [pressedButtonI][pressedButtonJ];
 
-                            valueOftile.setText(superTile.getValue() + ": " + superTile.getCanBombTile());
+                            valueOftile.setText(superTile.getValue() + ": " 
+                                + superTile.getCanBombTile());
 
-                            // valueOftile.setBounds(570, 250, 70, 50);
                             valueOftile.setFont(sidePanelTextFont);
                             valueOftile.setForeground(Color.WHITE);
                             sidePanel.add(valueOftile);
@@ -155,8 +145,9 @@ public class PlayPage {
                             bombingsLeft.setFont(sidePanelTextFont);
                             bombingsLeft.setForeground(Color.WHITE);
                             sidePanel.add(bombingsLeft);
-
-                            sidePanel.setVisible(true); // Show the side panel when a button is clicked
+                            
+                            // Show the side panel when a button is clicked:
+                            sidePanel.setVisible(true); 
                             playFrame.setSize(800, 600);
 
                             // Adding borders to the tiles that can be bombed, disabling all
@@ -171,7 +162,8 @@ public class PlayPage {
 
                                     if (gameSetup.getGrid()[m][n].getValue() 
                                         == superTile.calculateWhatTileSuperCanBomb()) {
-                                        buttons[m][n].setBorder(BorderFactory.createLineBorder(Color.GREEN, 4));
+                                        buttons[m][n].setBorder(BorderFactory
+                                            .createLineBorder(Color.GREEN, 4));
                                         buttons[m][n].setEnabled(true);
                                     }
                                 }
@@ -183,11 +175,7 @@ public class PlayPage {
                             sidePanel.revalidate();
                             sidePanel.repaint();
 
-
-                            
-
                             // Close button 
-                          
                             closeButton.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
@@ -197,20 +185,19 @@ public class PlayPage {
                                     sidePanel.setVisible(false);
 
                                     // Unchanging the borders
-                                    
-
                                     for (int m = 0; m < 4; m++) {
                                         for (int n = 0; n < 4; n++) {
                                             buttons[m][n].setEnabled(true);
 
-                                            if (gameSetup.getGrid()[m][n].getValue() == superTile.calculateWhatTileSuperCanBomb()) {
-                                                buttons[m][n].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
+                                            if (gameSetup.getGrid()[m][n].getValue() 
+                                                == superTile.calculateWhatTileSuperCanBomb()) {
+                                                buttons[m][n].setBorder(BorderFactory
+                                                    .createLineBorder(darkBlue, 2));
                                             }
 
                                             removeBombableListeners();
                                         }
                                     }
-
                                     playFrame.setSize(800, 600);
 
                                 }
@@ -242,7 +229,6 @@ public class PlayPage {
                 scoreLabel.setText(scoreString + gameSetup.getScore());
 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage(colorManager);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
@@ -270,7 +256,6 @@ public class PlayPage {
                 scoreLabel.setText(scoreString + gameSetup.getScore());
 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage(colorManager);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
@@ -295,7 +280,6 @@ public class PlayPage {
                 }
 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage(colorManager);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
@@ -322,11 +306,9 @@ public class PlayPage {
                 scoreLabel.setText(scoreString + gameSetup.getScore());
 
                 if (gameSetup.checkVictory()) {
-                    VictoryPage victoryPage = new VictoryPage(colorManager);
                     victoryPage.victoryPage();
                     redrawGrid();
                 }
-
             }
         });
 
@@ -338,7 +320,8 @@ public class PlayPage {
             for (int n = 0; n < 4; n++) {
                 int pressedM = m;
                 int pressedN = n;
-                if (gameSetup.getGrid()[m][n].getValue() == superTile.calculateWhatTileSuperCanBomb()) {
+                if (gameSetup.getGrid()[m][n].getValue() 
+                    == superTile.calculateWhatTileSuperCanBomb()) {
                     ActionListener listener = new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -351,14 +334,15 @@ public class PlayPage {
                             //sidePanel.remove();
                             sidePanel.setVisible(false);
                             for (int m = 0; m < 4; m++) {
-                                    for (int n = 0; n < 4; n++) {
-                                        buttons[m][n].setEnabled(true);
-
-                                            if (gameSetup.getGrid()[m][n].getValue() == superTile.calculateWhatTileSuperCanBomb()) {
-                                                buttons[m][n].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
-                                            }
-                                        }
+                                for (int n = 0; n < 4; n++) {
+                                    buttons[m][n].setEnabled(true);
+                                    if (gameSetup.getGrid()[m][n].getValue() 
+                                        == superTile.calculateWhatTileSuperCanBomb()) {
+                                        buttons[m][n].setBorder(BorderFactory
+                                            .createLineBorder(darkBlue, 2));
                                     }
+                                }
+                            }
                         }
                     };
                     buttons[m][n].addActionListener(listener);
@@ -382,7 +366,6 @@ public class PlayPage {
     public void redrawGrid() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                // we need to figure out how to pass the mode here
                 buttons[i][j].setText("" + gameSetup.getGrid()[i][j].getValue());
                 buttons[i][j].setBorder(BorderFactory.createLineBorder(darkBlue, 2));
                 if (gameSetup.getGrid()[i][j].getValue() != 0) {

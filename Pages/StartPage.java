@@ -1,42 +1,32 @@
+import Classes.ColorManager;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import Classes.ColorManager;
-import Classes.GameSetup;
-import java.awt.*;
-
-
 
 class StartPage {
     private ColorManager colorManager;
 
     public StartPage(ColorManager colorManager) {
         JFrame startPageWindowFrame = new JFrame("2048 MENU");
-        
         this.colorManager = colorManager;
-        // this is for existing the program
-        startPageWindowFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         Color darkBlue = new Color(0, 48, 73); 
         Color aqua = new Color(42, 157, 143);
         Color mustardYellow = new Color(234, 226, 183);
-
-        startPageWindowFrame.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         
+        startPageWindowFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        startPageWindowFrame.setLayout(new GridBagLayout());
 
         // Create a JPanel to hold the buttons
         JPanel panel = new JPanel();
         panel.setOpaque(false); // makes it transparent to show the JFrame's color
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        // creating three buttons, so far only play and settings work
 
         // PLAY BUTTON
         JButton buttonPlay = new JButton("Play");
@@ -45,11 +35,9 @@ class StartPage {
         buttonPlay.setBackground(mustardYellow);
         buttonPlay.setForeground(darkBlue);
 
-        GameSetup gameSetup = new GameSetup();
         buttonPlay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Hide the main frame
                 startPageWindowFrame.setVisible(false);
 
                 PlayPage playPage = new PlayPage(colorManager);
@@ -57,15 +45,12 @@ class StartPage {
             }
         });
 
-
         // RULES BUTTON
         JButton buttonRules = new JButton("Rules");
         buttonRules.setMaximumSize(new Dimension(200, 50));  
         buttonRules.setPreferredSize(new Dimension(200, 50));
         buttonRules.setBackground(aqua);
         buttonRules.setForeground(darkBlue);
-        
-
 
         // SETTINGS BUTTON
         JButton buttonSettings = new JButton("Settings");
@@ -101,7 +86,6 @@ class StartPage {
         
         // Set the size of the window
         startPageWindowFrame.setSize(600, 600);
-
         
         // Make the window visible
         startPageWindowFrame.setVisible(true);
