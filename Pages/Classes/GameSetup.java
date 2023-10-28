@@ -77,7 +77,8 @@ public class GameSetup {
 
             for (int row = 0; row < 4; row++) {
                 if (grid[row][col].hasValue()) {
-                    tileManager.setValue(0 + count, col, grid[row][col].getValue());
+                    // tileManager.setValue(0 + count, col, grid[row][col].getValue());
+                    tileManager.setValueOnMove(row, col, count, col, grid[row][col].getValue());
 
                     // Setting original tile as empty after the tile is moved
                     if (count != row) {
@@ -98,7 +99,8 @@ public class GameSetup {
 
             for (int row = 3; row >= 0; row--) {
                 if (grid[row][col].hasValue()) {
-                    tileManager.setValue(count, col, grid[row][col].getValue());
+                    // tileManager.setValue(count, col, grid[row][col].getValue());
+                    tileManager.setValueOnMove(row, col, count, col, grid[row][col].getValue());
 
                     // Setting original tile as empty after the tile is moved
                     if (count != row) {
@@ -118,7 +120,9 @@ public class GameSetup {
             int count = 3;
             for (int col = 3; col >= 0; col--) {
                 if (grid[row][col].hasValue()) {
-                    tileManager.setValue(row, count, grid[row][col].getValue());
+                    // tileManager.setValue(row, count, grid[row][col].getValue());
+                    tileManager.setValueOnMove(row, col, row, count, grid[row][col].getValue());
+
                     // Setting original tile as empty after the tile is moved
                     if (count != col) {
                         tileManager.setValueZero(row, col);
@@ -136,7 +140,8 @@ public class GameSetup {
             int count = 0;
             for (int col = 0; col < 4; col++) {
                 if (grid[row][col].hasValue()) {
-                    tileManager.setValue(row, count, grid[row][col].getValue());
+                    // tileManager.setValue(row, count, grid[row][col].getValue());
+                    tileManager.setValueOnMove(row, col, row, count, grid[row][col].getValue());
 
                     // Setting original tile as empty after the tile is moved
                     if (count != col) {
@@ -398,7 +403,7 @@ public class GameSetup {
         }
 
         Random rand = new Random();
-        int randomInt = rand.nextInt(101);
+        int randomInt = rand.nextInt(100);
         randNumber = arrayOfValues[randomInt];
 
         return randNumber;
