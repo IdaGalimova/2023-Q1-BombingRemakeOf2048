@@ -1,7 +1,6 @@
 package Classes;
 
 import java.util.Random;
-import java.awt.Color;
 
 public class GameSetup {
     private TileManager tileManager;
@@ -77,7 +76,6 @@ public class GameSetup {
 
             for (int row = 0; row < 4; row++) {
                 if (grid[row][col].hasValue()) {
-                    // tileManager.setValue(0 + count, col, grid[row][col].getValue());
                     tileManager.setValueOnMove(row, col, count, col, grid[row][col].getValue());
 
                     // Setting original tile as empty after the tile is moved
@@ -99,7 +97,6 @@ public class GameSetup {
 
             for (int row = 3; row >= 0; row--) {
                 if (grid[row][col].hasValue()) {
-                    // tileManager.setValue(count, col, grid[row][col].getValue());
                     tileManager.setValueOnMove(row, col, count, col, grid[row][col].getValue());
 
                     // Setting original tile as empty after the tile is moved
@@ -120,7 +117,6 @@ public class GameSetup {
             int count = 3;
             for (int col = 3; col >= 0; col--) {
                 if (grid[row][col].hasValue()) {
-                    // tileManager.setValue(row, count, grid[row][col].getValue());
                     tileManager.setValueOnMove(row, col, row, count, grid[row][col].getValue());
 
                     // Setting original tile as empty after the tile is moved
@@ -140,7 +136,6 @@ public class GameSetup {
             int count = 0;
             for (int col = 0; col < 4; col++) {
                 if (grid[row][col].hasValue()) {
-                    // tileManager.setValue(row, count, grid[row][col].getValue());
                     tileManager.setValueOnMove(row, col, row, count, grid[row][col].getValue());
 
                     // Setting original tile as empty after the tile is moved

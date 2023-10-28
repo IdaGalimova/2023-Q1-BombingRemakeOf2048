@@ -30,9 +30,13 @@ public class TileManager {
         return grid;
     }
 
+    public void setValueZero(int row, int col) {
+        grid[row][col] = new OrdinaryTile(0);
+    }
+
     public void setValue(int row, int col, int newValue) {
         if (newValue >= 64 && grid[row][col] instanceof OrdinaryTile && newValue != 2048) {
-            grid[row][col] = new SuperTile(newValue); // the problem is here
+            grid[row][col] = new SuperTile(newValue); 
             return;
         }
         grid[row][col].setValue(newValue);
@@ -44,11 +48,7 @@ public class TileManager {
         } else {
             grid[rowNew][colNew].setValue(newValue);
         }
-    }
-
-    public void setValueZero(int row, int col) {
-        grid[row][col] = new OrdinaryTile(0);
-    }
+    } 
 
     public void bombTile(int rowSuper, int colSuper, int rowToBomb, int colToBomb) {
         if (grid[rowSuper][colSuper] instanceof SuperTile) {
