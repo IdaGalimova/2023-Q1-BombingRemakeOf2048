@@ -14,15 +14,46 @@ import javax.swing.*;
  * @id 2004119
  */
 public class SettingsPage {
+    private float alpha = 1f;
+    
+    class TransparentLabel extends JLabel {
+        private float alpha = 1f;  
+    
+        public TransparentLabel(String text) {
+            super(text);
+        }
+    
+        public void setAlpha(float alpha) {
+            this.alpha = alpha;
+            repaint();
+        }
+    
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2d = (Graphics2D) g.create();
+            g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
+            super.paintComponent(g2d);
+            g2d.dispose();
+        }
+    }
+    
     GameSetup gameSetup = new GameSetup();
     private ColorManager colorManager;
-    JLabel messageLabel;
-
+    TransparentLabel messageLabel;
     Timer timer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            messageLabel.setText("");
-        }
+            // as i understand alpha is opcity of an object, so with timer opacity decreases
+            //until its transparent
+            alpha -= 0.05f;
+            if (alpha <= 0f) {
+                messageLabel.setAlpha(0f);  
+                timer.stop();
+                messageLabel.setText("");
+            } else {
+                messageLabel.setAlpha(alpha);  
+            }
+        } 
     });
 
     Color darkBlue = new Color(0, 48, 73);
@@ -45,9 +76,10 @@ public class SettingsPage {
         settingsFrame.getContentPane().setBackground(darkBlue);
         settingsFrame.setVisible(true);
 
-        messageLabel = new JLabel();
+        // Initialize with the custom TransparentLabel class
+        messageLabel = new TransparentLabel(""); 
         messageLabel.setBounds(150, 200, 300, 30);
-        messageLabel.setForeground(sandy); 
+        messageLabel.setForeground(sandy);
         settingsFrame.add(messageLabel);
 
         JButton lightModeButton = new JButton("Light mode");
@@ -62,6 +94,8 @@ public class SettingsPage {
                 if (timer != null && timer.isRunning()) {
                     timer.stop();
                 }
+                alpha = 1f;
+                messageLabel.setAlpha(1f);
                 timer.start();
                 
             }
@@ -81,6 +115,8 @@ public class SettingsPage {
                 if (timer != null && timer.isRunning()) {
                     timer.stop();
                 }
+                alpha = 1f;
+                messageLabel.setAlpha(1f);
                 timer.start();
             }
         });
@@ -101,3 +137,4 @@ public class SettingsPage {
 
     }
 }
+

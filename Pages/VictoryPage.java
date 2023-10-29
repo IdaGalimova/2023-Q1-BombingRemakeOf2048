@@ -18,8 +18,9 @@ public class VictoryPage {
 
     /** Initializes the colorManager.
      */
-    public VictoryPage(ColorManager colorManager) {
+    public VictoryPage(ColorManager colorManager, JFrame playFrame) {
         this.colorManager = colorManager;
+        this.playFrameReference = playFrame;
     }
 
     Color darkBlue = new Color(0, 48, 73);
@@ -28,6 +29,7 @@ public class VictoryPage {
     Color red = new Color(214, 40, 40);
     Color orange = new Color(247, 127, 0);
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 45);
+    private JFrame playFrameReference;
 
     /** Main method for this page.
      */
@@ -36,7 +38,7 @@ public class VictoryPage {
         JFrame victoryFrame = new JFrame();
         victoryFrame.setTitle("VICTORY");
         victoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        victoryFrame.setSize(600, 600);
+        victoryFrame.setSize(800, 600);
         victoryFrame.setLayout(new BorderLayout()); 
         victoryFrame.getContentPane().setBackground(sandy);
     
@@ -58,6 +60,7 @@ public class VictoryPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 victoryFrame.dispose(); 
+                playFrameReference.dispose();
                 new StartPage(colorManager);
             }
         });

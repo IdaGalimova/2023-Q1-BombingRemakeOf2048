@@ -13,6 +13,7 @@ import java.awt.Color;
 public class ColorManager {
     private int mode = 1;
     private Color textColor;
+    private Color backgroundColor;
 
     /**
      * Setting the mode and determining the color for the text.
@@ -20,6 +21,7 @@ public class ColorManager {
     public ColorManager(int mode) {
         this.mode = mode;
         textColor = determineTextColor();
+        backgroundColor = determineBackgroundColor();
     }
 
     /**Setting the mode.
@@ -27,12 +29,19 @@ public class ColorManager {
     public void setMode(int mode) {
         this.mode = mode;
         textColor = determineTextColor();
+        backgroundColor = determineBackgroundColor();
     }
 
     /** Getting the mode.
      */
     public Color getTextColor() {
         return textColor;
+    }
+
+    /** Gets background color.
+     */
+    public Color getBackgroundColor() {
+        return backgroundColor;
     }
 
     /** Determining the text color depending on the mode.
@@ -44,6 +53,19 @@ public class ColorManager {
             return new Color(235, 235, 235);
         }
         return null;
+    }
+
+    /** Determines background color depending on the mode.
+     */
+    public Color determineBackgroundColor() {
+        if (mode == 2) {
+            return new Color(0, 48, 73);
+        } else if (mode == 1) {
+            return new Color(160, 176, 234);
+        } 
+        
+        return null;
+        
     }
 
     /** Determining the color of the tile.

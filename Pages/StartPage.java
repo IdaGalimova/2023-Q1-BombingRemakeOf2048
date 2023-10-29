@@ -2,11 +2,13 @@ import Classes.ColorManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 /**
  * This class implements StartPage. This page acts as the menu for the game and is displayed after
@@ -23,12 +25,17 @@ class StartPage {
     /** Implements the functionality of the page.
      */
     public StartPage(ColorManager colorManager) {
+
         JFrame startPageWindowFrame = new JFrame("2048 MENU");
         this.colorManager = colorManager;
         
         Color darkBlue = new Color(0, 48, 73); 
-        Color mustardYellow = new Color(234, 226, 183);
+        Color aqua = new Color(42, 157, 143);
         
+        UIManager.put("ToolTip.background", aqua);
+        UIManager.put("ToolTip.foreground", darkBlue);
+        UIManager.put("ToolTip.font", new Font("Moonspaced", Font.ITALIC, 12));
+
         startPageWindowFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         startPageWindowFrame.setLayout(new GridBagLayout());
 
@@ -38,7 +45,9 @@ class StartPage {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // PLAY BUTTON
+        Color mustardYellow = new Color(234, 226, 183);
         JButton buttonPlay = new JButton("Play");
+        buttonPlay.setToolTipText("Start the game!");
         buttonPlay.setMaximumSize(new Dimension(200, 50));  
         buttonPlay.setPreferredSize(new Dimension(200, 50));
         buttonPlay.setBackground(mustardYellow);
@@ -55,7 +64,6 @@ class StartPage {
         });
 
         // RULES BUTTON
-        Color aqua = new Color(42, 157, 143);
         JButton buttonRules = new JButton("Rules");
         buttonRules.setMaximumSize(new Dimension(200, 50));  
         buttonRules.setPreferredSize(new Dimension(200, 50));
@@ -64,6 +72,7 @@ class StartPage {
 
         // SETTINGS BUTTON
         JButton buttonSettings = new JButton("Settings");
+        buttonSettings.setToolTipText("Adjust game settings.");
         buttonSettings.setMaximumSize(new Dimension(200, 50));  
         buttonSettings.setPreferredSize(new Dimension(200, 50));
         buttonSettings.setBackground(mustardYellow);
@@ -83,8 +92,6 @@ class StartPage {
         GridBagConstraints gbc = new GridBagConstraints();
         startPageWindowFrame.add(panel, gbc);
         panel.add(buttonPlay);
-        panel.add(Box.createVerticalStrut(20));
-        panel.add(buttonRules);
         panel.add(Box.createVerticalStrut(20));
         panel.add(buttonSettings);
         
