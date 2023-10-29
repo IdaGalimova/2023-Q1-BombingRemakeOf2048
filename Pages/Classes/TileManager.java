@@ -23,14 +23,6 @@ public class TileManager {
                 grid[i][j] = new OrdinaryTile(0);
             }
         }
-
-        setValue(2, 0, 32);
-        setValue(2, 1, 32);
-
-        setValue(3, 3, 32);
-        setValue(1, 3, 32);
-        setValue(0, 3, 32);
-
     }
 
     /** Gets the grid.

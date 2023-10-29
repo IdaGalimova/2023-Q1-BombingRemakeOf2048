@@ -1,7 +1,6 @@
 package Classes;
 
 /**
- * 
  * This class is used for testing if the back-end is working correctly.
  * It is not part of the main game. To run the game, you have to execute 
  * the file Main.java.
@@ -11,10 +10,10 @@ package Classes;
  * @author Skaiste Liutkute
  * @id 2004119
  */
-public class MainGame {
+public class TestingBackend {
     private GameSetup gameSetup;
 
-    public MainGame() {
+    public TestingBackend() {
         gameSetup = new GameSetup();
     }
 
@@ -29,6 +28,6 @@ public class MainGame {
     }
 
     public static void main(String[] args) {
-        new MainGame().run();
+        new TestingBackend().run();
     }
 }

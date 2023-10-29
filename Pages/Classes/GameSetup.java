@@ -20,6 +20,9 @@ public class GameSetup {
      */
     public GameSetup() {
         tileManager = new TileManager();
+        spawnNewTile();
+        spawnNewTile();
+
         score = 0;
     }
 
@@ -29,7 +32,7 @@ public class GameSetup {
         return tileManager.getGrid();
     }
 
-    /** Getting the scrore.
+    /** Getting the score.
      */
     public int getScore() {
         return score;

@@ -133,7 +133,8 @@ public class SettingsPage {
                         messageLabel.setAlpha(1f);
                         timer.start();
                         }
-                    settingsFrame.getContentPane().setBackground(colorManager.determineBackgroundColor());
+                    settingsFrame.getContentPane().setBackground(colorManager
+                        .determineBackgroundColor());
                     settingsFrame.revalidate();
                     settingsFrame.repaint();
             }

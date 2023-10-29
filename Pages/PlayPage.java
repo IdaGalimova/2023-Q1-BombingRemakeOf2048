@@ -264,7 +264,6 @@ public class PlayPage {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("left key pressed");
 
                 gameSetup.moveTiles("left");
                 redrawGrid();
@@ -288,7 +287,6 @@ public class PlayPage {
         contentPane.getActionMap().put("rightKey", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("right key pressed");
 
                 gameSetup.moveTiles("right");
                 redrawGrid();
@@ -313,7 +311,6 @@ public class PlayPage {
         contentPane.getActionMap().put("upKey", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("up key pressed");
 
                 gameSetup.moveTiles("up");
                 redrawGrid();
@@ -339,7 +336,6 @@ public class PlayPage {
         contentPane.getActionMap().put("downKey", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("down key pressed");
 
                 gameSetup.moveTiles("down");
                 redrawGrid();
