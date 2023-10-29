@@ -4,6 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+/**
+ * This class implements the GameOverPage. This page is displayed when the game
+ * is over.
+ * 
+ * @author Ida Galimova
+ * @id 1958895
+ * @author Skaiste Liutkute
+ * @id 2004119
+ */
 public class GameOverPage {
     Color darkBlue = new Color(0, 48, 73);
     Color sandy = new Color(234, 226, 183);
@@ -14,11 +23,14 @@ public class GameOverPage {
 
     private ColorManager colorManager;
 
+    /** Initializes the colorManager.
+     */
     public GameOverPage(ColorManager colorManager) {
         this.colorManager = colorManager;
     }
 
-
+    /** Main method for this page.
+     */
     public void runGameOver() {
         // Setting up game over frame:
         JFrame gameOverFrame = new JFrame();

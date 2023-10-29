@@ -8,6 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
+/**
+ * This class implements PlayPage. This is the page of the actual game. 
+ * 
+ * @author Ida Galimova
+ * @id 1958895
+ * @author Skaiste Liutkute
+ * @id 2004119
+ */
 public class PlayPage {
     private boolean wasBombed = false;
     GameSetup gameSetup = new GameSetup();
@@ -37,11 +45,14 @@ public class PlayPage {
     JLabel valueOftile = new JLabel();
     JLabel bombingsLeft = new JLabel();
         
-
+    /** Initializes the colorManager.
+     */
     public PlayPage(ColorManager colorManager) {
         this.colorManager = colorManager;
     }
 
+    /** Main method for this page.
+     */
     public void playPage() {
         buttons = new JButton[4][4];
 
@@ -314,6 +325,8 @@ public class PlayPage {
 
     }
 
+    /** Creates a listener for each button that can be bombed and adds it to the list.
+     */
     private void addBombableListener(int pressedButtonI, int pressedButtonJ) {
         SuperTile superTile = (SuperTile) gameSetup.getGrid()[pressedButtonI][pressedButtonJ];
         for (int m = 0; m < 4; m++) {
@@ -352,6 +365,8 @@ public class PlayPage {
         }
     }
     
+    /** Clears all of the listeners for the tiles that can be bombed.
+     */
     private void removeBombableListeners() {
         for (int m = 0; m < 4; m++) {
             for (int n = 0; n < 4; n++) {
@@ -363,6 +378,8 @@ public class PlayPage {
         
     }
 
+    /** Redraws the grid.
+     */
     public void redrawGrid() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {

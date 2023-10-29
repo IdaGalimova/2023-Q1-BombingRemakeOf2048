@@ -5,6 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+/**
+ * This class implements SettingsPage. On this page it's possible to select light/dark mode.
+ * 
+ * @author Ida Galimova
+ * @id 1958895
+ * @author Skaiste Liutkute
+ * @id 2004119
+ */
 public class SettingsPage {
     GameSetup gameSetup = new GameSetup();
     private ColorManager colorManager;
@@ -24,7 +32,9 @@ public class SettingsPage {
     Color orange = new Color(247, 127, 0);
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 15);
 
-    public void settingsPage(ColorManager colorManager){
+    /** Implements the main method of the settings page. 
+     */
+    public void settingsPage(ColorManager colorManager) {
         this.colorManager = colorManager;
 
         JFrame settingsFrame = new JFrame();

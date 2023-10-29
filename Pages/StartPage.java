@@ -8,17 +8,26 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * This class implements StartPage. This page acts as the menu for the game and is displayed after
+ * the program is executed.
+ * 
+ * @author Ida Galimova
+ * @id 1958895
+ * @author Skaiste Liutkute
+ * @id 2004119
+ */
 class StartPage {
     private ColorManager colorManager;
 
+    /** Implements the functionality of the page.
+     */
     public StartPage(ColorManager colorManager) {
         JFrame startPageWindowFrame = new JFrame("2048 MENU");
         this.colorManager = colorManager;
         
         Color darkBlue = new Color(0, 48, 73); 
-        Color aqua = new Color(42, 157, 143);
         Color mustardYellow = new Color(234, 226, 183);
-        GridBagConstraints gbc = new GridBagConstraints();
         
         startPageWindowFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         startPageWindowFrame.setLayout(new GridBagLayout());
@@ -46,6 +55,7 @@ class StartPage {
         });
 
         // RULES BUTTON
+        Color aqua = new Color(42, 157, 143);
         JButton buttonRules = new JButton("Rules");
         buttonRules.setMaximumSize(new Dimension(200, 50));  
         buttonRules.setPreferredSize(new Dimension(200, 50));
@@ -70,6 +80,7 @@ class StartPage {
 
         
         // Add the buttons to the panel
+        GridBagConstraints gbc = new GridBagConstraints();
         startPageWindowFrame.add(panel, gbc);
         panel.add(buttonPlay);
         panel.add(Box.createVerticalStrut(20));

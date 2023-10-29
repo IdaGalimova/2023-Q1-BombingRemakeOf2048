@@ -4,9 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+/**
+ * This class implements the VictoryPage. THis page is displayed when the game
+ * is won.
+ * 
+ * @author Ida Galimova
+ * @id 1958895
+ * @author Skaiste Liutkute
+ * @id 2004119
+ */
 public class VictoryPage {
     private ColorManager colorManager;
 
+    /** Initializes the colorManager.
+     */
     public VictoryPage(ColorManager colorManager) {
         this.colorManager = colorManager;
     }
@@ -18,6 +29,8 @@ public class VictoryPage {
     Color orange = new Color(247, 127, 0);
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 45);
 
+    /** Main method for this page.
+     */
     public void victoryPage() {
         // Setting up victory frame:
         JFrame victoryFrame = new JFrame();
