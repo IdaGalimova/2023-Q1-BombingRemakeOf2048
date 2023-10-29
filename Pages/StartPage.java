@@ -30,6 +30,7 @@ class StartPage {
         Color darkBlue = new Color(0, 48, 73); 
         Color aqua = new Color(42, 157, 143);
         Color mustardYellow = new Color(234, 226, 183);
+        Font buttonFont = new Font("Monospaced", Font.ITALIC | Font.BOLD, 20);
 
         UIManager.put("ToolTip.background", aqua);
         UIManager.put("ToolTip.foreground", darkBlue);
@@ -47,6 +48,9 @@ class StartPage {
 
         // PLAY BUTTON
         JButton buttonPlay = new JButton("Play");
+        buttonPlay.setFont(buttonFont);
+        buttonPlay.setBorder(BorderFactory.createLineBorder(darkBlue, 4));
+        buttonPlay.setFocusable(false);
         buttonPlay.setToolTipText("Start the game!");
         buttonPlay.setMaximumSize(new Dimension(200, 50));  
         buttonPlay.setPreferredSize(new Dimension(200, 50));
@@ -67,6 +71,9 @@ class StartPage {
 
         // SETTINGS BUTTON
         JButton buttonSettings = new JButton("Settings");
+        buttonSettings.setBorder(BorderFactory.createLineBorder(darkBlue, 4));
+        buttonSettings.setFont(buttonFont);
+        buttonSettings.setFocusable(false);
         buttonSettings.setToolTipText("Adjust game settings.");
         buttonSettings.setMaximumSize(new Dimension(200, 50));  
         buttonSettings.setPreferredSize(new Dimension(200, 50));
@@ -94,7 +101,7 @@ class StartPage {
         // Create color for the background
 
         //Set color for background
-        startPageWindowFrame.getContentPane().setBackground(darkBlue);
+        startPageWindowFrame.getContentPane().setBackground(colorManager.getBackgroundColor());
         
         // Set the size of the window
         startPageWindowFrame.setSize(600, 600);

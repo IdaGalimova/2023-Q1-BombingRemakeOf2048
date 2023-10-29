@@ -68,7 +68,7 @@ public class SettingsPage {
         settingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         settingsFrame.setSize(600, 600);
         settingsFrame.setLayout(null);
-        settingsFrame.getContentPane().setBackground(darkBlue);
+        settingsFrame.getContentPane().setBackground(colorManager.determineBackgroundColor());
         settingsFrame.setVisible(true);
 
 
@@ -84,12 +84,15 @@ public class SettingsPage {
 
         JButton lightModeButton = new JButton("Light mode");
         lightModeButton.setBounds(150, 250, 130, 100);
+        lightModeButton.setFont(moonspaced);
+        lightModeButton.setBorder(BorderFactory.createLineBorder(darkBlue, 4));
         lightModeButton.setBackground(sandy);
+        lightModeButton.setFocusable(false);
         lightModeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                     //   tried out animation. conclusion - it sucks 
-                    {
+                    
                         colorManager.setMode(1);
                         messageLabel.setText("Light Mode Activated!");
                         messageLabel.setBounds(150, 200, 300, 30);
@@ -99,7 +102,10 @@ public class SettingsPage {
                         alpha = 1f;
                         messageLabel.setAlpha(1f);
                         timer.start();
-                        }
+                        settingsFrame.getContentPane().setBackground(colorManager.determineBackgroundColor());
+                        settingsFrame.revalidate();
+                        settingsFrame.repaint();
+                    
             }
         });
 
@@ -107,7 +113,10 @@ public class SettingsPage {
 
         JButton darkModeButton = new JButton("Dark mode");
         darkModeButton.setBounds(300, 250, 130, 100);
+        darkModeButton.setBorder(BorderFactory.createLineBorder(darkBlue, 4));
+        darkModeButton.setFont(moonspaced);
         darkModeButton.setBackground(sandy);
+        darkModeButton.setFocusable(false);
         darkModeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -123,11 +132,19 @@ public class SettingsPage {
                         messageLabel.setAlpha(1f);
                         timer.start();
                         }
+
+                    settingsFrame.getContentPane().setBackground(colorManager.determineBackgroundColor());
+                    settingsFrame.revalidate();
+                    settingsFrame.repaint();
+                        
             }
         });
 
         JButton backButton = new JButton("Go Back");
-        backButton.setBounds(0, 0, 100, 20);
+        backButton.setBounds(20, 20, 100, 35);
+        backButton.setFocusable(false);
+        backButton.setFont(moonspaced);
+        backButton.setBorder(BorderFactory.createLineBorder(darkBlue, 4));
         backButton.setBackground(sandy);
         backButton.addActionListener(new ActionListener() {
             @Override

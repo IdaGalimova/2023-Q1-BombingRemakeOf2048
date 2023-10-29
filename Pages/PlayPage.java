@@ -25,7 +25,7 @@ public class PlayPage {
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 30);
     Font sidePanelTextFont = new Font("Monospaced", Font.ITALIC | Font.BOLD, 20);
     Font scroreFont = new Font("Monospaced", Font.ITALIC | Font.BOLD, 25);
-   Font rulesFont = new Font("Monospaced", Font.ITALIC | Font.BOLD, 15);
+   Font rulesFont = new Font("Monospaced", Font.ITALIC | Font.BOLD, 11);
     JButton[][] buttons;
     JLabel scoreLabel = new JLabel();
     String scoreString = "Score: ";
@@ -69,13 +69,13 @@ public class PlayPage {
         scoreLabel.setText(scoreString + gameSetup.getScore());
         scoreLabel.setFont(scroreFont);
         scoreLabel.setForeground(orange);
-        scoreLabel.setBounds(400, 0, 200, 20);
+        scoreLabel.setBounds(800, 0, 200, 20);
         playFrame.add(scoreLabel);
 
         // Setting up back button:
         JButton backButton = new JButton("Go Back");
-        backButton.setBounds(20, 20, 150, 35);
-        backButton.setBorder(BorderFactory.createLineBorder(darkBlue, 2));
+        backButton.setBounds(40, 20, 210, 35);
+        backButton.setBorder(BorderFactory.createLineBorder(darkBlue, 4));
         backButton.setBackground(darkBluelighter);
         backButton.setFont(sidePanelTextFont);
         backButton.setFocusable(false);
@@ -89,57 +89,49 @@ public class PlayPage {
         });
 
         // Setting up panel to show the SuperTile abilities
-        sidePanelRight.setBounds(760, 100, 200, 400);
+        sidePanelRight.setBounds(750, 100, 210, 400);
         sidePanelRight.setBorder(BorderFactory.createLineBorder(darkBlue, 4));
         sidePanelRight.setBackground(darkBluelighter);
         sidePanelRight.setVisible(false);
         playFrame.add(sidePanelRight);
 
         // Setting up side panel for rules
-        sidePanelLeft.setBounds(40, 100, 200, 400);
+        sidePanelLeft.setBounds(40, 100, 210, 400);
         sidePanelLeft.setBackground(darkBluelighter);
         sidePanelLeft.setVisible(false);
         playFrame.add(sidePanelLeft);
 
-        JTextArea textArea = new JTextArea(20, 19);
+        JTextArea textArea = new JTextArea(20, 30);
         textArea.setBackground(darkBluelighter);
         textArea.setFocusable(false);
         textArea.setFont(rulesFont);
         textArea.setForeground(Color.WHITE);
-        textArea.setText("Game Board: The game starts on a 4x4 grid.\r\n" + //
+        textArea.setText(
+                "RULES: " + //
                 "\r\n" + //
-                "Objective: Combine like-numbered tiles to reach the 2048 tile.\r\n" + //
-                "\r\n" + //
-                "Move Tiles: Swipe in any direction (up, down, left, right). All tiles move in that direction until they hit the edge or another tile.\r\n" + //
-                "\r\n" + //
-                "Combining Tiles: When two tiles with the same number touch, they combine into a tile with the value of their sum.\r\n" + //
-                "\r\n" + //
-                "Supertile: Any tile with a value greater than 64 is a supertile.\r\n" + //
-                "\r\n" + //
-                "Selecting Supertile for Bombing: To select a supertile to perform the bombing, press on the supertile.\r\n" + //
-                "\r\n" + //
-                "Bombing Tiles: Once selected, the supertile can bomb other tiles. It has this bombing ability up to three times.\r\n" + //
-                "\r\n" + //
-                "After Bombing: After a supertile bombs another tile for the third time, both the bombed tile and the supertile disappear from the board.\r\n" + //
-                "\r\n" + //
-                "End of Game: The game ends when there are no more possible moves and the board is full.\r\n" + //
-                "\r\n" + //
-                "Happy gaming!");
+                "Board: Start with a 4x4 grid.\r\n" + //
+                "Goal: Merge tiles to get the 2048 tile.\r\n" + //
+                "Moving Tiles: Swipe any direction to move tiles.\r\n" + //
+                "Merging: Tiles merge when they're the same number, creating a tile of their combined bo.\r\n" + //
+                "Supertile: Tiles above 64 value.\r\n" + //
+                "Bomb Ability: Tap a supertile to select. It can bomb (remove) other tiles, up to three times.\r\n" + //
+                "After 3 Bombs: The selected supertile and the last bombed tile vanish.\r\n" + //
+                "Game Over: When the board fills up and no more moves are possible.\r\n" + //
+                "Enjoy the game!");
         textArea.setWrapStyleWord(true); // wrap lines by words, not characters
         textArea.setLineWrap(true);      // wrap lines
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(10, 0, 180, 380);
         sidePanelLeft.setBorder(BorderFactory.createLineBorder(darkBlue, 4));
-        sidePanelLeft.revalidate();
-        sidePanelLeft.repaint();
-        sidePanelLeft.add(scrollPane);
-        scrollPane.setBounds(10, 10, 180, 380);  
+        sidePanelLeft.add(textArea);
 
         // Setting up the close button for the side panel
 
         
         sidePanelRight.add(closeButton);
-        closeButton.setBounds(10, 10, 40, 20);
+        closeButton.setBackground(darkBlue);
+        closeButton.setForeground(Color.WHITE);
+        closeButton.setFocusable(false);
+        closeButton.setFont(rulesFont);
+        closeButton.setBounds(480, 10, 40, 20);
 
         // Setting up the panel for the buttons
         panel.setBounds(300, 100, 400, 400);
@@ -147,6 +139,8 @@ public class PlayPage {
 
         playFrame.add(backButton);
         playFrame.add(panel);
+
+        sidePanelLeft.setVisible(true);
 
         // Creating buttons
 
@@ -200,7 +194,6 @@ public class PlayPage {
                             sidePanelRight.add(bombingsLeft);
 
                             sidePanelRight.setVisible(true); // Show the side panel when a button is clicked
-                            sidePanelLeft.setVisible(true);
                             playFrame.setSize(1000, 600);
 
                             // Adding borders to the tiles that can be bombed, disabling all
@@ -239,7 +232,6 @@ public class PlayPage {
                                     sidePanelRight.remove(bombingsLeftText);
                                     sidePanelRight.remove(bombingsLeft);
                                     sidePanelRight.setVisible(false);
-                                    sidePanelLeft.setVisible(false);
 
                                     // Unchanging the borders
                                     
@@ -394,7 +386,6 @@ public class PlayPage {
                             redrawGrid();
                             //sidePanel.remove();
                             sidePanelRight.setVisible(false);
-                            sidePanelLeft.setVisible(false);
                             for (int m = 0; m < 4; m++) {
                                     for (int n = 0; n < 4; n++) {
                                         buttons[m][n].setEnabled(true);
