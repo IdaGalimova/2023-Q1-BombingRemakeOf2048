@@ -29,6 +29,7 @@ public class VictoryPage {
     Color red = new Color(214, 40, 40);
     Color orange = new Color(247, 127, 0);
     Font moonspaced = new Font("Monospaced", Font.ITALIC | Font.BOLD, 45);
+    Font moonspaced2 = new Font("Monospaced", Font.ITALIC | Font.BOLD, 15);
     private JFrame playFrameReference;
 
     /** Main method for this page.
@@ -38,7 +39,7 @@ public class VictoryPage {
         JFrame victoryFrame = new JFrame();
         victoryFrame.setTitle("VICTORY");
         victoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        victoryFrame.setSize(800, 600);
+        victoryFrame.setSize(1000, 600);
         victoryFrame.setLayout(new BorderLayout()); 
         victoryFrame.getContentPane().setBackground(sandy);
     
@@ -56,6 +57,10 @@ public class VictoryPage {
 
 
         JButton gotoMenuButton = new JButton("Go to Menu");
+        gotoMenuButton.setBackground(darkBlue);
+        gotoMenuButton.setFont(moonspaced2);
+        gotoMenuButton.setFocusable(false);
+        gotoMenuButton.setForeground(Color.WHITE);
         gotoMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,6 +71,10 @@ public class VictoryPage {
         });
 
         JButton restartButton = new JButton("Restart");
+        restartButton.setBackground(darkBlue);
+        restartButton.setFont(moonspaced2);
+        restartButton.setForeground(Color.WHITE);
+        restartButton.setFocusable(false);
         restartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

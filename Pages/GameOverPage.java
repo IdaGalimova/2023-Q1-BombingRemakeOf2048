@@ -40,7 +40,7 @@ public class GameOverPage {
         JFrame gameOverFrame = new JFrame();
         gameOverFrame.setTitle("GAME OVER");
         gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameOverFrame.setSize(800, 600);
+        gameOverFrame.setSize(1000, 600);
         gameOverFrame.setLayout(new BorderLayout()); 
         gameOverFrame.getContentPane().setBackground(sandy);
     
