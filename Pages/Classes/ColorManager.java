@@ -2,25 +2,41 @@ package Classes;
 
 import java.awt.Color;
 
+/**
+ * This class provides methods to work with light and dark modes.
+ * 
+ * @author Ida Galimova
+ * @id 1958895
+ * @author Skaiste Liutkute
+ * @id 2004119
+ */
 public class ColorManager {
-
     private int mode = 1;
     private Color textColor;
 
+    /**
+     * Setting the mode and determining the color for the text.
+     */
     public ColorManager(int mode) {
         this.mode = mode;
         textColor = determineTextColor();
     }
 
+    /**Setting the mode.
+     */
     public void setMode(int mode) {
         this.mode = mode;
         textColor = determineTextColor();
     }
 
+    /** Getting the mode.
+     */
     public Color getTextColor() {
         return textColor;
     }
 
+    /** Determining the text color depending on the mode.
+     */
     public Color determineTextColor() {
         if (mode == 1) {
             return new Color(0, 48, 73);
@@ -30,6 +46,8 @@ public class ColorManager {
         return null;
     }
 
+    /** Determining the color of the tile.
+     */
     public void determineColor(Tile tile) {
         if (mode == 1) {
             tile.setColor(lightMode(tile.getValue()));
@@ -40,9 +58,9 @@ public class ColorManager {
         }
     }
 
+    /** Setting the colors for the dark mode depending on their value.
+     */
     public Color darkMode(int value) {
-        // Dark mode colors
-
         switch (value) {
             case 2: return new Color(78, 148, 78);
             case 4: return new Color(0, 128, 128);
@@ -59,9 +77,9 @@ public class ColorManager {
         }
     }
 
+    /** Setting the colors for the light mode depending on their value.
+     */
     public Color lightMode(int value) {
-        // Light mode colors
-
         switch (value) {
             case 2: return new Color(179, 223, 114);
             case 4: return new Color(42, 187, 127);

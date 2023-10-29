@@ -2,23 +2,41 @@ package Classes;
 
 import java.util.Random;
 
+/**
+ * This class implements the functionality of the game.
+ * It contains methods such as combining, moving, spawning, bombing, 
+ * game resetting, and checking for avalible moves, victory and game over.
+ * 
+ * @author Ida Galimova
+ * @id 1958895
+ * @author Skaiste Liutkute
+ * @id 2004119
+ */
 public class GameSetup {
     private TileManager tileManager;
     private int score;
 
+    /** Initializing tileManager and setting score.
+     */
     public GameSetup() {
         tileManager = new TileManager();
         score = 0;
     }
 
+    /** Getting the grid.
+     */
     public Tile[][] getGrid() {
         return tileManager.getGrid();
     }
 
+    /** Getting the scrore.
+     */
     public int getScore() {
         return score;
     }
 
+    /** Printing the grid. Implemented only for back-end testing.
+     */
     public void printGrid() {
         Tile[][] grid = tileManager.getGrid();
         
@@ -45,6 +63,10 @@ public class GameSetup {
         System.out.println(splitterLine);
     }
 
+    /** 
+     * Checking if it's possible to move tiles to the provided direction,
+     * and then moving and combining them. After the tiles are moved, a new tile is spawn.
+     */
     public void moveTiles(String direction) {
         if (canMove(direction)) {
             if (direction == "up") {
@@ -64,10 +86,12 @@ public class GameSetup {
                 combineTilesLeft();
                 moveTilesLeft();
             }
-            fillTileWithRandomNumber();
+            spawnNewTile();
         }
     }
 
+    /** Moves all of the tiles up. Helper method for the moveTiles() method
+     */
     public void moveTilesUp() {
         Tile[][] grid = tileManager.getGrid();
 
@@ -77,7 +101,7 @@ public class GameSetup {
             for (int row = 0; row < 4; row++) {
                 if (grid[row][col].hasValue()) {
                     tileManager.setValueOnMove(row, col, count, col, grid[row][col].getValue());
-
+                    
                     // Setting original tile as empty after the tile is moved
                     if (count != row) {
                         tileManager.setValueZero(row, col);
@@ -89,6 +113,8 @@ public class GameSetup {
 
     }
 
+    /** Moves all of the tiles down. Helper method for the moveTiles() method
+     */
     public void moveTilesDown() {
         Tile[][] grid = tileManager.getGrid();
 
@@ -110,6 +136,8 @@ public class GameSetup {
 
     }
 
+    /** Moves all of the tiles right. Helper method for the moveTiles() method
+     */
     public void moveTilesRight() {
         Tile[][] grid = tileManager.getGrid();
 
@@ -129,6 +157,8 @@ public class GameSetup {
         }
     }
 
+    /** Moves all of the tiles left. Helper method for the moveTiles() method
+     */
     public void moveTilesLeft() {
         Tile[][] grid = tileManager.getGrid();
 
@@ -148,6 +178,9 @@ public class GameSetup {
         }
     }
 
+    /** Combines the tiles with the same value when moving them upwards. 
+     *  Helper method for the moveTiles() method
+     */
     public void combineTilesUp() {
         Tile[][] grid = tileManager.getGrid();
         
@@ -169,6 +202,9 @@ public class GameSetup {
         }
     }
 
+    /** Combines the tiles with the same value when moving them downwards. 
+     *  Helper method for the moveTiles() method
+     */
     public void combineTilesDown() {
         Tile[][] grid = tileManager.getGrid();
         
@@ -190,6 +226,9 @@ public class GameSetup {
         }
     }
 
+    /** Combines the tiles with the same value when moving them to the right. 
+     *  Helper method for the moveTiles() method
+     */
     public void combineTilesRight() {
         Tile[][] grid = tileManager.getGrid();
         
@@ -212,6 +251,9 @@ public class GameSetup {
         }
     }
 
+    /** Combines the tiles with the same value when moving them to the left. 
+     *  Helper method for the moveTiles() method
+     */
     public void combineTilesLeft() {
         Tile[][] grid = tileManager.getGrid();
         
@@ -234,11 +276,15 @@ public class GameSetup {
         }
     }
 
+    /** Destroys a tile by providing the position of the SuperTile and tile to bomb.
+     */
     public void bombATile(int rowSuper, int colSuper, int rowToBomb, int colToBomb) { 
         tileManager.bombTile(rowSuper, colSuper, rowToBomb, colToBomb);
 
     }
 
+    /** Checks if it's possible to move tiles in the certain direction.
+     */
     public boolean canMove(String direction) {
         if (direction == "left") {
             return canMoveLeft();
@@ -253,6 +299,9 @@ public class GameSetup {
         return false;
     }
 
+    /** Checks if it's possible to move tiles to the left.
+     *  Helper method for the canMove() method
+     */
     public boolean canMoveLeft() {
         Tile[][] grid = tileManager.getGrid();
         
@@ -272,6 +321,9 @@ public class GameSetup {
         return false;
     }
 
+    /** Checks if it's possible to move tiles to the right.
+     *  Helper method for the canMove() method
+     */
     public boolean canMoveRight() {
         Tile[][] grid = tileManager.getGrid();
         
@@ -290,6 +342,9 @@ public class GameSetup {
         return false;
     }
 
+    /** Checks if it's possible to move tiles upwards.
+     *  Helper method for the canMove() method
+     */
     public boolean canMoveUp() {
         Tile[][] grid = tileManager.getGrid();
         
@@ -308,6 +363,9 @@ public class GameSetup {
         return false;
     }
 
+    /** Checks if it's possible to move tiles downwards.
+     *  Helper method for the canMove() method
+     */
     public boolean canMoveDown() {
         Tile[][] grid = tileManager.getGrid();
         
@@ -326,7 +384,8 @@ public class GameSetup {
         return false;
     }
 
-    // Method to check if there is a tile with value "2048"
+    /** Checks if there is a tile with "2048" value.
+     */
     public boolean checkVictory() {
         Tile[][] grid = tileManager.getGrid();
 
@@ -344,7 +403,8 @@ public class GameSetup {
         return checkVictory;
     }
 
-    // Method to check if there are any empty tiles left
+    /** Checks if a grid is full.
+     */
     public boolean checkIfFullGrid() {
         Tile[][] grid = tileManager.getGrid();
         
@@ -361,7 +421,8 @@ public class GameSetup {
         return isFull;
     }
 
-    // Method to check if there are any available moves left
+    /** Checks if there are any available moves left.
+     */
     public boolean hasAvailableMoves() {
         if (!canMoveDown() && !canMoveUp() && !canMoveLeft() && !canMoveRight()) {
             return false;
@@ -369,6 +430,8 @@ public class GameSetup {
         return true;
     }
 
+    /** Checks if the game is over.
+     */
     public boolean checkGameOver() {
         if (checkIfFullGrid() && !hasAvailableMoves()) {
             resetGame();
@@ -378,8 +441,12 @@ public class GameSetup {
         }
     }
 
-    // Method to generate a random number
-    public int generateNumber() {
+    /** Generates a random value for the tile to spawn. The value of the tile is calculated by 
+     * selecting a random value, with the highest likelihood of getting 2 and 
+     * the lowest probability of choosing 32.
+     * Helper method for the spawnNewTile() method
+     */
+    public int generateRandomValue() {
         int randNumber;
         int[] arrayOfValues = new int[100];
 
@@ -404,8 +471,9 @@ public class GameSetup {
         return randNumber;
     }
 
-    // Method to fill a random tile
-    public Tile[][] fillTileWithRandomNumber() {
+    /** Spawns a new tile at a random place.
+     */
+    public Tile[][] spawnNewTile() {
         Tile[][] grid = tileManager.getGrid();
         
         if (!checkIfFullGrid()) {
@@ -415,10 +483,10 @@ public class GameSetup {
             int randomCol = rand.nextInt(4);
 
             if (grid[randomRow][randomCol].getValue() == 0) {
-                int randomValue = generateNumber();
+                int randomValue = generateRandomValue();
                 tileManager.setValue(randomRow, randomCol, randomValue);
             } else if (grid[randomRow][randomCol].getValue() != 0) {
-                fillTileWithRandomNumber();
+                spawnNewTile();
             }
 
         }
@@ -426,6 +494,8 @@ public class GameSetup {
         return grid;
     }
 
+    /** Resets the game.
+     */
     public void resetGame() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -434,8 +504,8 @@ public class GameSetup {
         }
         score = 0;
 
-        fillTileWithRandomNumber();
-        fillTileWithRandomNumber();
+        spawnNewTile();
+        spawnNewTile();
     }
 
 }

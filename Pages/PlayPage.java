@@ -70,7 +70,7 @@ public class PlayPage {
             public void actionPerformed(ActionEvent e) {
                 playFrame.setVisible(false);
                 playFrame.dispose();
-                StartPage startPage = new StartPage(colorManager);
+                new StartPage(colorManager);
             }
         });
 

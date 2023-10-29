@@ -1,5 +1,16 @@
 package Classes;
 
+/**
+ * 
+ * This class is used for testing if the back-end is working correctly.
+ * It is not part of the main game. To run the game, you have to execute 
+ * the file Main.java.
+ * 
+ * @author Ida Galimova
+ * @id 1958895
+ * @author Skaiste Liutkute
+ * @id 2004119
+ */
 public class MainGame {
     private GameSetup gameSetup;
 
@@ -12,23 +23,7 @@ public class MainGame {
         System.out.println();
         gameSetup.printGrid();
 
-        // gameSetup.moveTiles("down");
-        // gameSetup.printGrid();
-
         gameSetup.moveTiles("right");
-        gameSetup.printGrid();
-
-        
-        gameSetup.bombATile(2, 3, 3, 3);
-        gameSetup.printGrid();
-
-        gameSetup.moveTiles("left");
-        gameSetup.printGrid();
-
-        gameSetup.bombATile(2, 0, 1, 0);
-        gameSetup.printGrid();
-
-        gameSetup.bombATile(2, 0, 0, 0);
         gameSetup.printGrid();
 
     }
